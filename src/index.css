@@ -96,11 +96,16 @@ body {
   align-items: center;
   pointer-events: none;
   z-index: 0;
+  overflow: hidden;
 }
 
 .skyline-image {
   width: 100%;
-  height: auto;
+  height: 80%;
+  object-fit: cover;
+  object-position: center bottom;
+  clip-path: inset(0 0 20% 0);
+  transform: translateY(10%);
   mask-image: linear-gradient(to bottom, black 0%, black 75%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 0%, black 75%, transparent 100%);
 }
@@ -166,9 +171,7 @@ body {
     font-size: 0.8rem;
   }
 
-  .skyline-image {
-    max-width: 400px;
-  }
+
 }
 
 .header {
