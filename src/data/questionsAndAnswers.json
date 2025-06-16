@@ -1,0 +1,13 @@
+{
+  "suggestedQuestions": [
+    "What is the name of the city?"
+  ],
+  "predefinedAnswers": {
+    "What is the name of the city?": [
+      "Toronto1",
+          
+      "Toronto2"
+    ]
+  },
+  "systemInstructions": "You are the AI assistant on civicflow.ca..."
+}
