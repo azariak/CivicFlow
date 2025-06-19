@@ -1,12 +1,16 @@
 {
   "suggestedQuestions": [
-    "What is the name of the city?"
+    "How many people live in Toronto?", "Where are the off-leash dog parks?"
   ],
   "predefinedAnswers": {
-    "What is the name of the city?": [
+    "How many people live in Toronto?": [
       "Toronto1",
           
       "Toronto2"
+    ],
+    "Where are the off-leash dog parks?": [
+      "Dog Park1",
+      "Dog Park2"
     ]
   },
   "systemInstructions": "You are the AI assistant on civicflow.ca..."
