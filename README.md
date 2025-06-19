@@ -8,12 +8,10 @@
 4. Input your Gemini API Key in settings (or configure a .env when that's set up)
 
 
-TODO:
+## TODO:
 - Use https://github.com/vduquette/toronto-open-data-mcp-server to connect to Gemini to allow natural querying of municipal data
 - Suggested questions and answers
-- Add .env file, local and hosted version, purchase domain?
-- Update UI to incorporate City of Toronto aesthetic
-- Rename?
+- Add .env file, local version, purchase domain?
 - Better mobile support, fix skyline on mobile
 - Analytics
 - Voice mode?

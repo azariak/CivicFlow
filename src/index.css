@@ -13,39 +13,41 @@
 /* BLue: 003896  Red: C8102E information */
 
 .light {
-  --background: #f8f4eb;
+  --background: #f8f9fa;
   --card-bg: #ffffff;
   --text: #2c2c2c;
   --text-blue: #003896;
   --text-secondary: #666666;
-  --border: #e8e1d4;
-  --button: #826f5d;
-  --button-hover: #6d5c4d;
+  --border: #e0e6ed;
+  --button: #003896;
+  --button-hover: #002a6b;
   --input: #ffffff;
-  --chat-bg: #f0f0f0;
-  --pill-bg: #e8e1d4;
-  --pill-hover: #d8d1c4;
+  --chat-bg: #f4f6f8;
+  --pill-bg: #e8f0fe;
+  --pill-hover: #d2e3fc;
   --scroll-button: rgba(255, 255, 255, 0.9);
   --scrollbar-thumb: #c0c0c0;
   --scrollbar-track: #f0f0f0;
+  --accent-red: #C8102E;
 }
 
 .dark {
-  --background: #1a1a1a;
-  --text-blue: #ffffff;
-  --card-bg: #2a2a2a;
+  --background: #0f1419;
+  --text-blue: #4a9eff;
+  --card-bg: #1a1f2e;
   --text: #ffffff;
   --text-secondary: #a0a0a0;
-  --border: #404040;
-  --button: #4a4a4a;
-  --button-hover: #5a5a5a;
-  --input: #333333;
-  --chat-bg: #252525;
-  --pill-bg: #333333;
-  --pill-hover: #404040;
-  --scroll-button: rgba(42, 42, 42, 0.9);
+  --border: #2a3441;
+  --button: #003896;
+  --button-hover: #4a9eff;
+  --input: #252d3a;
+  --chat-bg: #151b26;
+  --pill-bg: #252d3a;
+  --pill-hover: #2a3441;
+  --scroll-button: rgba(26, 31, 46, 0.9);
   --scrollbar-thumb: #404040;
-  --scrollbar-track: #2a2a2a;
+  --scrollbar-track: #1a1f2e;
+  --accent-red: #ff4757;
 }
 
 body {
