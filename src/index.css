@@ -266,12 +266,14 @@ body {
   background-color: var(--button);
   color: #ffffff;
   align-self: flex-start;
+  opacity: 0.85;
 }
 
 .user-message {
   background-color: var(--border);
   color: var(--text);
   align-self: flex-end;
+  opacity: 0.85;
 }
 
 .suggested-questions-container {
