@@ -321,7 +321,7 @@ const App = () => {
           className="link"
         >
           Azaria Kelman
-        </a> <a href="https://lu.ma/apcio9op" target="_blank" rel="noopener noreferrer" className="link"> @ PROGRAM: Toronto</a>
+        </a> @ <a href="https://lu.ma/apcio9op" target="_blank" rel="noopener noreferrer" className="link"> PROGRAM: Toronto</a>
       </div>
     </div>
   );
