@@ -148,6 +148,13 @@ body {
     font-size: 1.3rem;
   }
   
+  .reset-button {
+    font-size: 1rem;
+    min-width: 1.75rem;
+    height: 1.75rem;
+    padding: 0.4rem;
+  }
+  
   /* Optimize input area for mobile */
   .input-area {
     padding: 0.75rem;
@@ -177,8 +184,13 @@ body {
 .header {
   padding: 1rem;
   border-bottom: 1px solid var(--border);
-  text-align: center;
   background-color: var(--card-bg);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header-title {
@@ -186,6 +198,31 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.reset-button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.reset-button:hover {
+  opacity: 1;
+  background-color: var(--border);
+  color: var(--text);
 }
 
 .chat-container {

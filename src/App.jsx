@@ -35,6 +35,17 @@ const App = () => {
   const systemInstructions = questionsAndAnswers.systemInstructions;
   const messagesEndRef = useRef(null);
 
+  // Reset function to reset the chat to initial state
+  const resetChat = () => {
+    setMessages([
+      { role: 'assistant', content: "Hi there! Welcome to CivicFlowTO!" },
+      { role: 'assistant', content: "What would you like to know about Toronto and its <a href='https://www.toronto.ca/city-government/data-research-maps/open-data/' target='_blank' rel='noopener noreferrer' style='color: white; text-decoration: underline;'>open data</a>?" },
+    ]);
+    setInputMessage('');
+    setIsLoading(false);
+    setSuggestedQuestions((prevQuestions) => shuffleArray([...questionsAndAnswers.suggestedQuestions]));
+  };
+
   useEffect(() => {
     setSuggestedQuestions((prevQuestions) => shuffleArray([...prevQuestions]));
   }, []);
@@ -266,7 +277,17 @@ const App = () => {
         </div>
         
         <header className="header">
-          <h1 className="header-title" style={{ color: 'var(--text-blue)' }}>Ask The City 🦝</h1>
+          <div className="header-content">
+            <h1 className="header-title" style={{ color: 'var(--text-blue)' }}>Ask The City 🦝</h1>
+            <button
+              className="reset-button"
+              onClick={resetChat}
+              aria-label="Reset chat"
+              title="Reset chat"
+            >
+              ↻
+            </button>
+          </div>
         </header>
 
         <main className="chat-container">

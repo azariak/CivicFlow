@@ -9,6 +9,5 @@ TODO:
 - Rename?
 - Better mobile support, fix skyline on mobile
 - Analytics
-- Reset chat
 - Voice mode?
 - Subtitle with instructions
