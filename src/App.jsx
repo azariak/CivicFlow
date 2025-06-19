@@ -181,7 +181,7 @@ const App = () => {
         try {
           const genAI = new GoogleGenerativeAI(localApiKey);
           const model = genAI.getGenerativeModel({ 
-            model: "gemini-2.0-flash-exp",
+            model: "gemini-1.5-flash-latest",
             systemInstruction: systemInstructions 
           });
 
