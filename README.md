@@ -13,6 +13,7 @@
 - Suggested questions and answers
 - Add .env file, local version, purchase domain?
 - Better mobile support, fix skyline on mobile
+- Update dark mode icon
 - Analytics
 - Voice mode?
 - Subtitle with instructions

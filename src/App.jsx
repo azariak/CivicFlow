@@ -250,7 +250,7 @@ const App = () => {
           onClick={() => setIsDarkMode(!isDarkMode)}
           aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
         >
-          {isDarkMode ? '☀️' : '🌙'}
+          {isDarkMode ? '☀' : '🌙'}
         </button>
         <button
           className="control-button"
