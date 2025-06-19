@@ -12,12 +12,6 @@ export function HelpContent() {
           <li><strong>Dark Mode:</strong> Toggle between light and dark themes using the moon/sun button</li>
         </ul>
         
-        <h4>Getting Started</h4>
-        <ol>
-          <li>Try one of the suggested questions below the chat</li>
-          <li>Or type your own question about Toronto in the input field</li>
-          <li>Press Enter or click the send button to get your answer</li>
-        </ol>
         
         <h4>Tips</h4>
         <ul>
