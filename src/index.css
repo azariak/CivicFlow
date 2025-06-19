@@ -520,3 +520,83 @@ body {
   letter-spacing: 0.01em;
   margin-top: 0px;
 }
+
+/* Help Popup Styles */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: var(--standard-shadow);
+}
+
+.popup-close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.popup-close:hover {
+  background-color: var(--border);
+}
+
+.popup-title {
+  color: var(--text);
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  padding-right: 2rem;
+}
+
+.popup-content {
+  color: var(--text);
+}
+
+.popup-section h4 {
+  color: var(--text-blue);
+  margin: 1.5rem 0 0.75rem 0;
+  font-size: 1.1rem;
+}
+
+.popup-section h4:first-child {
+  margin-top: 0;
+}
+
+.popup-section ul,
+.popup-section ol {
+  margin: 0.5rem 0 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.popup-section li {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.popup-section strong {
+  color: var(--text-blue);
+}

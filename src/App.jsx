@@ -4,6 +4,7 @@ import SettingsModal from './SettingsModal';
 import MessageList from './MessageList';
 import InputArea from './InputArea';
 import SuggestedQuestions from './SuggestedQuestions';
+import { HelpPopup } from './helpPopup';
 import './index.css';
 import questionsAndAnswers from './data/questionsAndAnswers.json';
 
@@ -19,6 +20,7 @@ function shuffleArray(array) {
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [messages, setMessages] = useState([
     { role: 'assistant', content: "Hi there! Welcome to CivicFlowTO!" },
     { role: 'assistant', content: "What would you like to know about Toronto and its <a href='https://www.toronto.ca/city-government/data-research-maps/open-data/' target='_blank' rel='noopener noreferrer' style='color: white; text-decoration: underline;'>open data</a>?" },
@@ -220,6 +222,13 @@ const App = () => {
       <div className="header-controls">
         <button
           className="control-button"
+          onClick={() => setIsHelpOpen(true)}
+          aria-label="Open Help"
+        >
+          <img src="/help.svg" alt="Help" width={20} height={20} />
+        </button>
+        <button
+          className="control-button"
           onClick={() => window.open('https://github.com/azariak/CivicFlow', '_blank')}
           aria-label="Open GitHub"
         >
@@ -244,6 +253,11 @@ const App = () => {
       <SettingsModal
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
+      />
+
+      <HelpPopup
+        isOpen={isHelpOpen}
+        onClose={() => setIsHelpOpen(false)}
       />
 
       <div className="content">
