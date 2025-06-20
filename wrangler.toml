@@ -1,7 +1,11 @@
-nodejs_compat = true
 name = "civicflow"
 compatibility_date = "2024-06-20"
-compatibility_flags = ["nodejs_compat"]
 
-[pages_build_output]
-"functions-output-dir" = "/functions" 
+[build]
+command = "npm run build"
+
+[functions]
+directory = "./functions"
+
+[compatibility_flags]
+flags = ["nodejs_compat"]
