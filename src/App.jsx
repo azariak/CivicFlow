@@ -23,7 +23,7 @@ const App = () => {
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [messages, setMessages] = useState([
     { role: 'assistant', content: "Hi there! Welcome to CivicFlowTO!" },
-    { role: 'assistant', content: "What would you like to know about Toronto and its <a href='https://www.toronto.ca/city-government/data-research-maps/open-data/' target='_blank' rel='noopener noreferrer' style='color: white; text-decoration: underline;'>open data</a>?" },
+    { role: 'assistant', content: "What would you like to know about Toronto and its [open data](https://www.toronto.ca/city-government/data-research-maps/open-data/)?" },
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +39,7 @@ const App = () => {
   const resetChat = () => {
     setMessages([
       { role: 'assistant', content: "Hi there! Welcome to CivicFlowTO!" },
-      { role: 'assistant', content: "What would you like to know about Toronto and its <a href='https://www.toronto.ca/city-government/data-research-maps/open-data/' target='_blank' rel='noopener noreferrer' style='color: white; text-decoration: underline;'>open data</a>?" },
+      { role: 'assistant', content: "What would you like to know about Toronto and its [open data](https://www.toronto.ca/city-government/data-research-maps/open-data/)?" },
     ]);
     setInputMessage('');
     setIsLoading(false);

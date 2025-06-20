@@ -1,5 +1,5 @@
 import React from "react";
-// import ReactMarkdown from "react-markdown";
+import ReactMarkdown from "react-markdown";
 
 const MessageList = ({ messages }) => {
   const markdownStyles = {
@@ -25,22 +25,22 @@ const MessageList = ({ messages }) => {
           }`}
           style={{ display: "inline-block" }}
         >
-          {/* <ReactMarkdown
-            className="markdown-content"
-            components={{
-              p: ({ children }) => <span style={markdownStyles}>{children}</span>,
-              a: ({ children, href }) => (
-                <a href={href} style={linkStyles}>
-                  {children}
-                </a>
-              ),
-            }}
-          >
-            {msg.content}
-          </ReactMarkdown> */}
-          {/* <span>{msg.content}</span> */}
-          <span dangerouslySetInnerHTML={{ __html: msg.content }} />
-
+          <div className="markdown-content">
+            <ReactMarkdown
+              components={{
+                p: ({ children }) => (
+                  <span style={markdownStyles}>{children}</span>
+                ),
+                a: ({ children, href }) => (
+                  <a href={href} style={linkStyles}>
+                    {children}
+                  </a>
+                ),
+              }}
+            >
+              {msg.content}
+            </ReactMarkdown>
+          </div>
         </div>
       ))}
     </div>
