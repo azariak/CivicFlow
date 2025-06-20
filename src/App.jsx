@@ -58,7 +58,7 @@ const App = () => {
     if (text.trim() === '' || isLoading) return;
 
     const userMessage = { role: 'user', content: text };
-    const assistantPlaceholder = { role: 'assistant', content: '' };
+    const assistantPlaceholder = { role: 'assistant', content: '', usedMcp: false };
 
     // Add user message and placeholder for assistant response
     setMessages((prev) => [...prev, userMessage, assistantPlaceholder]);
@@ -163,6 +163,10 @@ const App = () => {
                 } catch (e) {
                   console.error("Error parsing SSE line:", line, e);
                 }
+              } else if (line.startsWith('event: mcp_used')) {
+                setMessages((prev) => prev.map((msg, index) => 
+                  index === prev.length - 1 ? { ...msg, usedMcp: true } : msg
+                ));
               } else if (line.startsWith('event: error')) {
                  // Handle explicit error events if the backend sends them
                  // The data line following this should contain the error details
@@ -181,7 +185,7 @@ const App = () => {
         try {
           const genAI = new GoogleGenerativeAI(localApiKey);
           const model = genAI.getGenerativeModel({ 
-            model: "gemini-1.5-flash-latest",
+            model: "Gemini 2.5 Flash-Lite	",
             systemInstruction: systemInstructions 
           });
 

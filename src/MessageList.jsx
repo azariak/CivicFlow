@@ -22,7 +22,7 @@ const MessageList = ({ messages }) => {
           key={index}
           className={`message ${
             msg.role === "assistant" ? "assistant-message" : "user-message"
-          }`}
+          } ${msg.usedMcp ? "mcp-message" : ""}`}
           style={{ display: "inline-block" }}
         >
           <div className="markdown-content">
@@ -41,6 +41,11 @@ const MessageList = ({ messages }) => {
               {msg.content}
             </ReactMarkdown>
           </div>
+          {msg.usedMcp && (
+            <div className="mcp-indicator">
+              Powered by Toronto Open Data
+            </div>
+          )}
         </div>
       ))}
     </div>

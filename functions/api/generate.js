@@ -1,4 +1,15 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI, mcpToTool } from '@google/genai';
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+
+const serverParams = new StdioClientTransport({
+  command: "npx",
+  args: [
+    "@modelcontextprotocol/server-fetch",
+    "https://toronto-mcp.s-a62.workers.dev/sse"
+  ],
+  env: {}
+});
 
 export async function onRequestPost(context) {
   try {
@@ -27,18 +38,23 @@ export async function onRequestPost(context) {
       });
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash-latest",
+    const mcpClient = new Client({ name: "toronto-open-data", version: "1.0.0" });
+    await mcpClient.connect(serverParams);
+
+    const ai = new GoogleGenAI(apiKey);
+    const model = ai.getGenerativeModel({
+      model: "gemini-2.5-flash",
       systemInstruction: systemInstructions,
     });
 
     const { readable, writable } = new TransformStream();
     const writer = writable.getWriter();
     const encoder = new TextEncoder();
+    let mcpUsed = false;
 
     const stream = await model.generateContentStream({
       contents: [{ role: "user", parts: [{ text: prompt }] }],
+      tools: [mcpToTool(mcpClient)],
       generationConfig: {
         maxOutputTokens: 1000,
       },
@@ -47,16 +63,23 @@ export async function onRequestPost(context) {
     (async () => {
       try {
         for await (const chunk of stream.stream) {
+          if (chunk.functionCalls && chunk.functionCalls.length > 0) {
+            mcpUsed = true;
+          }
           const chunkText = chunk.text();
           if (chunkText) {
             await writer.write(encoder.encode(`data: ${JSON.stringify({ chunk: chunkText })}\n\n`));
           }
+        }
+        if (mcpUsed) {
+          await writer.write(encoder.encode(`event: mcp_used\ndata: {}\n\n`));
         }
       } catch (error) {
         console.error("Gemini stream processing error:", error);
         await writer.write(encoder.encode(`event: error\ndata: ${JSON.stringify({ error: "Failed to generate response", details: error.message })}\n\n`));
       } finally {
         await writer.close();
+        await mcpClient.close();
       }
     })();
 
