@@ -277,10 +277,25 @@ body {
 }
 
 .user-message {
-  background-color: var(--border);
-  color: var(--text);
+  background-color: var(--button);
+  color: white;
   align-self: flex-end;
   opacity: 0.85;
+}
+
+.mcp-message {
+  background-color: var(--pill-bg);
+  border: 1px solid var(--border);
+}
+
+.mcp-badge {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
 }
 
 .suggested-questions-container {
@@ -288,6 +303,7 @@ body {
   padding: 0.5rem 1rem;
   border-top: 1px solid var(--border);
   background-color: var(--card-bg);
+  border-bottom: 1px solid var(--border);
 }
 
 .suggested-questions {

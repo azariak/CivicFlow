@@ -22,7 +22,7 @@ const MessageList = ({ messages }) => {
           key={index}
           className={`message ${
             msg.role === "assistant" ? "assistant-message" : "user-message"
-          }`}
+          } ${msg.isMcp ? "mcp-message" : ""}`}
           style={{ display: "inline-block" }}
         >
           {/* <ReactMarkdown
@@ -40,7 +40,11 @@ const MessageList = ({ messages }) => {
           </ReactMarkdown> */}
           {/* <span>{msg.content}</span> */}
           <span dangerouslySetInnerHTML={{ __html: msg.content }} />
-
+          {msg.isMcp && (
+            <span className="mcp-badge">
+              Powered by Open Data
+            </span>
+          )}
         </div>
       ))}
     </div>
