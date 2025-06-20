@@ -11,7 +11,7 @@
 ## TODO:
 - Use https://github.com/vduquette/toronto-open-data-mcp-server to connect to Gemini to allow natural querying of municipal data
 - Suggested questions and answers
-- Add .env file, local version, purchase domain?
-- Better mobile support, fix skyline on mobile
+- Add .env file in addition to settings modal
+- Purchase domain?
 - Analytics
 - Voice mode?
