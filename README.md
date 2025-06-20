@@ -1,6 +1,8 @@
 # CivicFlowTO
 ## Create by Azaria Kelman @ PROGRAM: Toronto Hackathon
 
+### Demo version that uses some hard-coded data. Full MCP version coming soon.
+
 ## Installation and configuration instructions 
 1. Clone the repository: `git clone https://github.com/azariak/CivicFlow.git`
 2. Install dependencies: `npm install`
