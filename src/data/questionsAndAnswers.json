@@ -1,6 +1,12 @@
 {
   "suggestedQuestions": [
-    "How many people live in Toronto?", "Where are the off-leash dog parks?"
+    "How many people live in Toronto?", 
+    "Where are the off-leash dog parks?",
+    "What traffic data is available in Toronto?",
+    "How current is Toronto's environmental data?",
+    "What fields are in the building permits dataset?",
+    "Give me insights about Toronto's budget data",
+    "Which datasets update daily?"
   ],
   "predefinedAnswers": {
     "How many people live in Toronto?": [
@@ -11,6 +17,29 @@
     "Where are the off-leash dog parks?": [
       "Dog Park1",
       "Dog Park2"
+    ],
+    "What traffic data is available in Toronto?": [
+      "Traffic Data1",
+      "Traffic Data2",
+      "Traffic Data3"
+    ],
+    "How current is Toronto's environmental data?": [
+      "Environmental Data1",
+      "Environmental Data2"
+    ],
+    "What fields are in the building permits dataset?": [
+      "Building Permits1",
+      "Building Permits2",
+      "Building Permits3"
+    ],
+    "Give me insights about Toronto's budget data": [
+      "Budget Data1",
+      "Budget Data2",
+      "Budget Data3"
+    ],
+    "Which datasets update daily?": [
+      "Daily Updates1",
+      "Daily Updates2"
     ]
   },
   "systemInstructions": "You are the AI assistant on civicflow.pages.dev, created by Azaria Kelman at the PROGRAM: Toronto hackathon.. Your goal is to answer questions about Toronto and its open data."
