@@ -283,6 +283,19 @@ body {
   opacity: 0.85;
 }
 
+.mcp-message {
+  border-left: 4px solid var(--text-blue);
+  padding-left: 1rem;
+}
+
+.mcp-indicator {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-align: right;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
 .suggested-questions-container {
   position: relative;
   padding: 0.5rem 1rem;
