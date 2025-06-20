@@ -1,3 +1,4 @@
+nodejs_compat = true
 name = "civicflow"
 compatibility_date = "2024-06-20"
 compatibility_flags = ["nodejs_compat"]

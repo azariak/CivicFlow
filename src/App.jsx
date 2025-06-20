@@ -72,7 +72,7 @@ const isTorontoOrDataRelated = (text) => {
     'planning', 'development', 'infrastructure', 'traffic', 'parking',
     'waste', 'recycling', 'energy', 'water', '311', 'services', 'government',
     'council', 'ward', 'neighbourhood', 'district', 'downtown', 'scarborough',
-    'etobicoke', 'north york', 'leash', 'east york', 'statistics', 'census', 'report', 'budget', 'budget data', 'environment', 'traffic'
+    'etobicoke', 'north york', 'animal', 'leash', 'east york', 'statistics', 'census', 'report', 'budget', 'budget data', 'environment', 'traffic'
   ];
   
   const lowerText = text.toLowerCase();
