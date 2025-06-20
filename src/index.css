@@ -277,25 +277,10 @@ body {
 }
 
 .user-message {
-  background-color: var(--button);
-  color: white;
+  background-color: var(--border);
+  color: var(--text);
   align-self: flex-end;
   opacity: 0.85;
-}
-
-.mcp-message {
-  background-color: var(--pill-bg);
-  border: 1px solid var(--border);
-}
-
-.mcp-badge {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--border);
 }
 
 .suggested-questions-container {
@@ -303,7 +288,6 @@ body {
   padding: 0.5rem 1rem;
   border-top: 1px solid var(--border);
   background-color: var(--card-bg);
-  border-bottom: 1px solid var(--border);
 }
 
 .suggested-questions {
@@ -661,4 +645,29 @@ body {
 
 .popup-section strong {
   color: var(--text-blue);
+}
+
+.mcp-message {
+  border-left: 3px solid var(--text-blue);
+  position: relative;
+  padding-left: 1.2rem; /* Add some space for the border */
+  padding-bottom: 20px; /* Make space for the attribution label */
+}
+
+.mcp-message::after {
+  content: 'Powered by Toronto Open Data';
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-blue);
+  opacity: 0.8;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  z-index: 0;
+}
+
+/* Ensure the text content inside has priority over the ::after element */
+.mcp-message span {
+    position: relative;
+    z-index: 1;
 }

@@ -40,11 +40,7 @@ const MessageList = ({ messages }) => {
           </ReactMarkdown> */}
           {/* <span>{msg.content}</span> */}
           <span dangerouslySetInnerHTML={{ __html: msg.content }} />
-          {msg.isMcp && (
-            <span className="mcp-badge">
-              Powered by Open Data
-            </span>
-          )}
+
         </div>
       ))}
     </div>
