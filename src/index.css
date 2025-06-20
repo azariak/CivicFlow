@@ -134,6 +134,11 @@ body {
     max-height: 650px;
   }
   
+  /* Shift skyline to show CN tower on mobile */
+  .skyline-image {
+    object-position: 25% bottom;
+  }
+  
   /* Improve message display on small screens */
   .message {
     max-width: 85%; /* Slightly wider messages on mobile */
