@@ -1,10 +1,6 @@
-import { GoogleGenerativeAI, mcpToTool } from "@google/generative-ai";
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export async function onRequestPost(context) {
-  let mcpClient = null;
-  
   try {
     const { request, env } = context;
     const { prompt, systemInstructions } = await request.json();
@@ -31,22 +27,6 @@ export async function onRequestPost(context) {
       });
     }
 
-    // Create MCP client for Toronto Open Data
-    const serverParams = new StdioClientTransport({
-      command: "npx",
-      args: ["@modelcontextprotocol/server-fetch", "https://toronto-mcp.s-a62.workers.dev/sse"]
-    });
-
-    mcpClient = new Client(
-      {
-        name: "civicflow-client",
-        version: "1.0.0"
-      }
-    );
-
-    // Initialize the connection between client and server
-    await mcpClient.connect(serverParams);
-
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({
       model: "gemini-1.5-flash-latest",
@@ -62,7 +42,6 @@ export async function onRequestPost(context) {
       generationConfig: {
         maxOutputTokens: 1000,
       },
-      tools: [mcpToTool(mcpClient)], // Add MCP tools for Toronto Open Data
     });
 
     (async () => {
@@ -98,14 +77,5 @@ export async function onRequestPost(context) {
         status: 500,
         headers: { "Content-Type": "application/json" },
     });
-  } finally {
-    // Clean up MCP connection
-    if (mcpClient) {
-      try {
-        await mcpClient.close();
-      } catch (closeError) {
-        console.error("Error closing MCP client:", closeError);
-      }
-    }
   }
 } 
