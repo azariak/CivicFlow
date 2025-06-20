@@ -1,6 +1,17 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 
+const PoweredByBadge = () => {
+  return (
+    <div className="powered-by-badge">
+      <div className="badge-content">
+        <img src="/TorontoLogo.svg" alt="Toronto Logo" className="badge-logo" width={16} height={16} />
+        <span className="badge-text">Powered by City of Toronto Open Data</span>
+      </div>
+    </div>
+  );
+};
+
 const MessageList = ({ messages }) => {
   const markdownStyles = {
     display: "inline",
@@ -41,6 +52,7 @@ const MessageList = ({ messages }) => {
               {msg.content}
             </ReactMarkdown>
           </div>
+          {msg.role === "assistant" && msg.showDataBadge && <PoweredByBadge />}
         </div>
       ))}
     </div>

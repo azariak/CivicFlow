@@ -646,3 +646,181 @@ body {
 .popup-section strong {
   color: var(--text-blue);
 }
+
+/* Querying Open Data UI Styles */
+.querying-open-data {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  align-self: flex-start;
+  max-width: 80%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.querying-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.toronto-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.querying-title {
+  font-weight: 600;
+  color: var(--text-blue);
+  font-size: 0.9rem;
+}
+
+.querying-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border);
+  border-top: 2px solid var(--text-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.querying-text {
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.data-source-info {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark mode specific adjustments */
+.dark .querying-open-data {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile responsiveness for querying UI */
+@media (max-width: 768px) {
+  .querying-open-data {
+    max-width: 90%;
+    padding: 0.8rem;
+  }
+  
+  .querying-title {
+    font-size: 0.85rem;
+  }
+  
+  .querying-text {
+    font-size: 0.8rem;
+  }
+  
+  .data-source-info {
+    font-size: 0.7rem;
+  }
+}
+
+/* Powered By Badge Styles */
+.powered-by-badge {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.9;
+}
+
+.badge-logo {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1); /* Makes the logo white */
+}
+
+.badge-text {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.01em;
+}
+
+/* Dark mode adjustments for badge */
+.dark .badge-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark .powered-by-badge {
+  border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Light mode adjustments for badge (when used in different contexts) */
+.light .user-message .badge-text {
+  color: var(--text-secondary);
+  text-shadow: none;
+  font-weight: 600;
+}
+
+.light .user-message .powered-by-badge {
+  border-top-color: var(--border);
+}
+
+.light .user-message .badge-logo {
+  filter: brightness(0) saturate(100%) invert(38%) sepia(100%) saturate(500%) hue-rotate(200deg); /* Toronto blue for light mode in user messages */
+}
+
+/* Mobile responsiveness for badge */
+@media (max-width: 768px) {
+  .badge-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  
+  .badge-logo {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .powered-by-badge {
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
+  }
+  
+  .badge-content {
+    gap: 0.4rem;
+  }
+}

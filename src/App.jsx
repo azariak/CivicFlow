@@ -17,10 +17,73 @@ function shuffleArray(array) {
   return newArray;
 }
 
+// Component to show when querying open data
+const QueryingOpenDataUI = () => {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [dots, setDots] = useState('');
+
+  const steps = [
+    'Connecting to City of Toronto Open Data Portal',
+    'Searching datasets',
+    'Processing data',
+    'Analyzing results'
+  ];
+
+  useEffect(() => {
+    const stepInterval = setInterval(() => {
+      setCurrentStep(prev => (prev + 1) % steps.length);
+    }, 600);
+
+    const dotsInterval = setInterval(() => {
+      setDots(prev => prev.length >= 3 ? '' : prev + '.');
+    }, 300);
+
+    return () => {
+      clearInterval(stepInterval);
+      clearInterval(dotsInterval);
+    };
+  }, []);
+
+  return (
+    <div className="querying-open-data">
+      <div className="querying-header">
+        <div className="toronto-logo">
+          <img src="/TorontoLogo.svg" alt="Toronto Logo" width={24} height={24} />
+        </div>
+        <span className="querying-title">City of Toronto Open Data</span>
+      </div>
+      <div className="querying-status">
+        <div className="loading-spinner"></div>
+        <span className="querying-text">{steps[currentStep]}{dots}</span>
+      </div>
+      <div className="data-source-info">
+        <small>Accessing live datasets from toronto.ca</small>
+      </div>
+    </div>
+  );
+};
+
+// Function to detect if a question is about Toronto or data
+const isTorontoOrDataRelated = (text) => {
+  const keywords = [
+    'toronto', 'city', 'data', 'population', 'demographics', 'transit', 'ttc',
+    'housing', 'property', 'taxes', 'budget', 'crime', 'police', 'fire',
+    'health', 'environment', 'parks', 'recreation', 'business', 'permits',
+    'planning', 'development', 'infrastructure', 'traffic', 'parking',
+    'waste', 'recycling', 'energy', 'water', '311', 'services', 'government',
+    'council', 'ward', 'neighbourhood', 'district', 'downtown', 'scarborough',
+    'etobicoke', 'north york', 'east york', 'statistics', 'census', 'report', 'budget', 'budget data', 'environment', 'traffic'
+  ];
+  
+  const lowerText = text.toLowerCase();
+  return keywords.some(keyword => lowerText.includes(keyword));
+};
+
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [isQueryingOpenData, setIsQueryingOpenData] = useState(false);
   const [messages, setMessages] = useState([
     { role: 'assistant', content: "Hi there! Welcome to CivicFlowTO!" },
     { role: 'assistant', content: "What would you like to know about Toronto and its [open data](https://www.toronto.ca/city-government/data-research-maps/open-data/)?" },
@@ -43,6 +106,7 @@ const App = () => {
     ]);
     setInputMessage('');
     setIsLoading(false);
+    setIsQueryingOpenData(false);
     setSuggestedQuestions((prevQuestions) => shuffleArray([...questionsAndAnswers.suggestedQuestions]));
   };
 
@@ -58,7 +122,7 @@ const App = () => {
     if (text.trim() === '' || isLoading) return;
 
     const userMessage = { role: 'user', content: text };
-    const assistantPlaceholder = { role: 'assistant', content: '' };
+    const assistantPlaceholder = { role: 'assistant', content: '', showDataBadge: false };
 
     // Add user message and placeholder for assistant response
     setMessages((prev) => [...prev, userMessage, assistantPlaceholder]);
@@ -66,11 +130,36 @@ const App = () => {
     setIsLoading(true);
 
     const simulateThinking = () => new Promise(resolve => setTimeout(resolve, 200));
+    
+    // Check if the question is about Toronto or data
+    const shouldShowOpenDataUI = isTorontoOrDataRelated(text);
+    
+    // Show open data querying UI if relevant
+    if (shouldShowOpenDataUI) {
+      await simulateThinking();
+      setIsQueryingOpenData(true);
+      // Show the querying UI for 2-3 seconds
+      await new Promise(resolve => setTimeout(resolve, 2500));
+      setIsQueryingOpenData(false);
+    }
+
+    // Helper function to update the last message (assistant's response)
+    const updateLastMessage = (chunk) => {
+      setMessages((prev) => prev.map((msg, index) => 
+        index === prev.length - 1 ? { 
+          ...msg, 
+          content: msg.content + chunk,
+          showDataBadge: shouldShowOpenDataUI // Add badge for Toronto/data-related responses
+        } : msg
+      ));
+    };
 
     // Handle predefined answers
     if (predefinedAnswers[text]) {
       // Keep the initial thinking delay, but stream the answer afterwards
-      await simulateThinking(); 
+      if (!shouldShowOpenDataUI) {
+        await simulateThinking(); 
+      }
       const answers = predefinedAnswers[text];
       const randomAnswer = answers[Math.floor(Math.random() * answers.length)];
       
@@ -86,7 +175,11 @@ const App = () => {
         if (chunkToAdd.length > 0) {
           setMessages((prev) => prev.map((msg, index) =>
             index === prev.length - 1
-              ? { ...msg, content: msg.content + chunkToAdd } // Append the chunk
+              ? { 
+                  ...msg, 
+                  content: msg.content + chunkToAdd,
+                  showDataBadge: shouldShowOpenDataUI // Add badge for Toronto/data-related responses
+                } // Append the chunk
               : msg
           ));
           currentStreamedLength = nextChunkEnd;
@@ -101,20 +194,19 @@ const App = () => {
       return; // Return early as we handled the predefined answer
     }
 
-    // Helper function to update the last message (assistant's response)
-    const updateLastMessage = (chunk) => {
-      setMessages((prev) => prev.map((msg, index) => 
-        index === prev.length - 1 ? { ...msg, content: msg.content + chunk } : msg
-      ));
-    };
-
     // Helper function to handle API errors
     const handleApiError = async (errorMessage) => {
       console.error('API error:', errorMessage);
-      await simulateThinking(); // Keep thinking simulation for errors
+      if (!shouldShowOpenDataUI) {
+        await simulateThinking(); // Keep thinking simulation for errors
+      }
       setMessages((prev) => prev.map((msg, index) => 
         index === prev.length - 1 
-          ? { ...msg, content: 'An error occurred. Please try again later.' } 
+          ? { 
+              ...msg, 
+              content: 'An error occurred. Please try again later.',
+              showDataBadge: shouldShowOpenDataUI
+            } 
           : msg
       ));
       setIsLoading(false);
@@ -292,6 +384,7 @@ const App = () => {
 
         <main className="chat-container">
           <MessageList messages={messages} />
+          {isQueryingOpenData && <QueryingOpenDataUI />}
           <div ref={messagesEndRef} />
         </main>
 
