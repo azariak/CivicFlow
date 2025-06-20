@@ -10,39 +10,36 @@
   ],
   "predefinedAnswers": {
     "How many people live in Toronto?": [
-      "According to the latest census data, Toronto has a population of approximately 2.8 million people within the city limits.",
-      "The Greater Toronto Area (GTA) has over 6.4 million residents, making it Canada's largest metropolitan area.",
-      "Toronto's population has been growing steadily, with an annual growth rate of about 1-2% over the past decade."
+      "Toronto1",
+          
+      "Toronto2"
     ],
     "Where are the off-leash dog parks?": [
-      "Toronto has over 70 designated off-leash dog areas across the city, including popular spots like Trinity Bellwoods Park, High Park, and Riverdale Park East.",
-      "You can find off-leash areas in most major parks. Each area has specific hours (typically 6 AM to 9 AM and 5 PM to 11 PM) when dogs can run freely.",
-      "The City's Open Data portal provides a complete list of off-leash dog areas with locations, hours, and amenities. Many are located near ravines and waterfront areas."
+      "Dog Park1",
+      "Dog Park2"
     ],
     "What traffic data is available in Toronto?": [
-      "Toronto provides real-time traffic volume data from over 1,000 traffic counting stations across the city, updated every 15 minutes.",
-      "Available datasets include traffic signal timing, road closures, construction permits, and historical traffic flow patterns dating back to 2010.",
-      "The city also publishes collision data, traffic signal locations, and speed limit information through the Open Data portal."
+      "Traffic Data1",
+      "Traffic Data2",
+      "Traffic Data3"
     ],
     "How current is Toronto's environmental data?": [
-      "Air quality data is updated hourly from monitoring stations across the city, with real-time readings for pollutants like PM2.5, ozone, and nitrogen dioxide.",
-      "Weather data is refreshed every 15 minutes, while water quality reports for beaches are updated daily during swimming season (May to September).",
-      "Tree inventory data is updated annually, and energy consumption data for city facilities is published quarterly with a 3-month lag."
+      "Environmental Data1",
+      "Environmental Data2"
     ],
     "What fields are in the building permits dataset?": [
-      "The building permits dataset includes permit number, application date, permit type, construction value, property address, and ward information.",
-      "Additional fields cover project description, permit status, issued date, construction start/end dates, and contractor details.",
-      "The dataset also includes property classifications, building use categories, number of residential units, and square footage for commercial projects."
+      "Building Permits1",
+      "Building Permits2",
+      "Building Permits3"
     ],
     "Give me insights about Toronto's budget data": [
-      "Toronto's 2024 operating budget is approximately $16.2 billion, with the largest portions allocated to transportation (33%) and community services (25%).",
-      "The city's capital budget focuses heavily on transit expansion, housing initiatives, and infrastructure renewal, totaling over $40 billion over 10 years.",
-      "Property taxes account for about 36% of city revenues, while user fees, government transfers, and development charges make up the remainder."
+      "Budget Data1",
+      "Budget Data2",
+      "Budget Data3"
     ],
     "Which datasets update daily?": [
-      "Traffic volume data, parking ticket information, and 311 service requests are updated daily, typically by midnight.",
-      "Beach water quality during swimming season, transit service alerts, and building permit applications are also refreshed daily.",
-      "Real-time datasets like traffic signals, bike share availability, and city facility operating hours update throughout the day."
+      "Daily Updates1",
+      "Daily Updates2"
     ]
   },
   "systemInstructions": "You are the AI assistant on civicflow.pages.dev, created by Azaria Kelman at the PROGRAM: Toronto hackathon.. Your goal is to answer questions about Toronto and its open data."
