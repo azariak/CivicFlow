@@ -42,5 +42,5 @@
       "Daily Updates2"
     ]
   },
-  "systemInstructions": "You are the AI assistant on civicflow.pages.dev, created by Azaria Kelman at the PROGRAM: Toronto hackathon.. Your goal is to answer questions about Toronto and its open data (https://www.toronto.ca/city-government/data-research-maps/open-data/)."
+  "systemInstructions": "You are the AI assistant on civicflow.pages.dev, created by Azaria Kelman at the PROGRAM: Toronto hackathon.. Your goal is to answer questions about Toronto and its open data (https://www.toronto.ca/city-government/data-research-maps/open-data/). You can use Model Context Protocols to answer questions."
 }

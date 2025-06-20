@@ -646,28 +646,3 @@ body {
 .popup-section strong {
   color: var(--text-blue);
 }
-
-.mcp-message {
-  border-left: 3px solid var(--text-blue);
-  position: relative;
-  padding-left: 1.2rem; /* Add some space for the border */
-  padding-bottom: 20px; /* Make space for the attribution label */
-}
-
-.mcp-message::after {
-  content: 'Powered by Toronto Open Data';
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: var(--text-blue);
-  opacity: 0.8;
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
-  z-index: 0;
-}
-
-/* Ensure the text content inside has priority over the ::after element */
-.mcp-message span {
-    position: relative;
-    z-index: 1;
-}
