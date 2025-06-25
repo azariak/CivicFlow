@@ -15,5 +15,4 @@
 - Suggested questions and answers
 - Add .env file in addition to settings modal
 - Purchase domain?
-- Analytics
 - Voice mode?
