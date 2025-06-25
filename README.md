@@ -16,3 +16,4 @@
 - Add .env file in addition to settings modal
 - Purchase domain?
 - Voice mode?
+- Merge 2 API Gemini paths in app.jsx and generate.js
