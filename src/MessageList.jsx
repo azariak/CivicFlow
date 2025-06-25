@@ -4,10 +4,16 @@ import ReactMarkdown from "react-markdown";
 const PoweredByBadge = () => {
   return (
     <div className="powered-by-badge">
-      <div className="badge-content">
+      <a 
+        href="https://www.toronto.ca/city-government/data-research-maps/open-data/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="badge-content"
+        style={{ textDecoration: 'none', color: 'inherit' }}
+      >
         <img src="/TorontoLogo.svg" alt="Toronto Logo" className="badge-logo" width={16} height={16} />
         <span className="badge-text">Powered by City of Toronto Open Data</span>
-      </div>
+      </a>
     </div>
   );
 };
