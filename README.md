@@ -3,17 +3,17 @@
 
 ### Demo version that uses some hard-coded data. Full MCP version coming soon.
 
+## Key features
+- AI-powered chat interface for querying Toronto's open data and city services using MCP
+- Suggested questions to demonstrate how to use it
+- Markdown formatting support for text responses
+- Help menu, add Gemini API key in settings, dark/light theme
+
 ## Installation and configuration instructions 
 1. Clone the repository: `git clone https://github.com/azariak/CivicFlow.git`
 2. Install dependencies: `npm install`
 3. Run the project: `npm run dev`
 4. Input your Gemini API Key in settings (or configure a .env when that's set up)
-
-## Key features
-- AI-powered chat interface for querying Toronto's open data and city services using MCP
-- Suggested questions to demonstrate how to use it
-- Markdown formatting support for text responses
-- Help menu, add API in settings, dark/light theme
 
 ## Code Layout
   - `App.jsx` - Core application with most stuff (including Gemini calls when using API key in settings)
@@ -35,6 +35,6 @@
 - Suggested questions and answers
 - Add .env file in addition to settings modal
 - Purchase domain?
-- Voice mode?
 - Merge 2 API Gemini paths in app.jsx and generate.js
 - Rename to DataFlow?
+- Voice mode?
