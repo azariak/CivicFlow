@@ -4,8 +4,12 @@ compatibility_date = "2024-06-20"
 [build]
 command = "npm run build"
 
-[functions]
-directory = "./functions"
+# Environment variables for the Functions
+# You can set these in your Cloudflare Pages dashboard under Settings -> Environment Variables
+# Or uncomment and set them here for production:
+# MCP_SERVER_URL = "https://your-mcp-server.workers.dev"
 
-[compatibility_flags]
-flags = ["nodejs_compat"]
+# For local development, create a .dev.vars file in your project root with:
+# MCP_SERVER_URL = "http://localhost:8787"    # Server must expose /mcp endpoint
+# MCP_TOKEN = "your-optional-auth-token"
+# GEMINI_API_KEY = "your-gemini-api-key"

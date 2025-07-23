@@ -1,0 +1,17 @@
+# Copy this file to .dev.vars for local development
+# These variables will be used by your Cloudflare Pages Functions
+
+# Your Google Gemini API key
+GEMINI_API_KEY=your-gemini-api-key-here
+
+# URL of your MCP server (deployed to Cloudflare Workers)
+# Note: Use base URL (will automatically append /sse endpoint)
+MCP_SERVER_URL=https://toronto-mcp.s-a62.workers.dev
+
+# Optional: Authentication token for your MCP server (if required)
+# MCP_TOKEN=your-mcp-server-auth-token
+
+# For production deployment, set these as environment variables in your Cloudflare Pages dashboard:
+# 1. Go to your Cloudflare Pages project
+# 2. Navigate to Settings -> Environment Variables
+# 3. Add the same variables (but with production values for MCP_SERVER_URL) 
