@@ -30,11 +30,11 @@
 - `public/` - Static assets (logos, icons, SVGs)
 
 ## TODO:
-- Use https://github.com/vduquette/toronto-open-data-mcp-server to connect to Gemini to allow natural querying of municipal data
+- Chat history
+- Readd animation
 - Add support for viewing embedded data, charts etc.. 
-- Suggested questions and answers
-- Add .env file in addition to settings modal
-- Purchase domain?
+- Purchase domain
+- Fix {"chunk":... \n"} bug when saying eg 'hi'
 - Merge 2 API Gemini paths in app.jsx and generate.js
 - Rename to DataFlow?
 - Voice mode?

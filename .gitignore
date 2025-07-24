@@ -25,6 +25,13 @@ toronto-mcp-main
 *.sln
 *.sw?
 
+*.js
+!src/**/*.js  # Keep manually written JS files
+functionsWorker-*
+functionsRoutes-*
+.wrangler/*
+
+
 .env
 
 .dev.vars
