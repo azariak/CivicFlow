@@ -1,6 +1,6 @@
 {
   "suggestedQuestions": [
-    "How many people live in Toronto?", 
+    "How many people live in Toronto?",
     "Where are the off-leash dog parks?",
     "What traffic data is available in Toronto?",
     "How current is Toronto's environmental data?",
@@ -8,28 +8,6 @@
     "Give me insights about Toronto's budget data",
     "Which datasets update daily?"
   ],
-  "predefinedAnswers": {
-    "How many people live in Toronto?": [
-      "**Toronto Population Overview**  \\nAccording to the 2021 Canadian Census, the City of Toronto has a population of approximately **2,794,356** residents, making it the largest city in Canada. The **Greater Toronto Area (GTA)**, which includes surrounding municipalities, is home to over **6.7 million people**. Toronto's population is highly diverse, with more than half of its residents born outside Canada, representing over 200 distinct ethnic origins. The city has experienced steady growth, with projections estimating the population will surpass 3 million by 2030. For the most up-to-date figures, visit the [City of Toronto's Open Data Portal](https://open.toronto.ca/dataset/city-of-toronto-population-demographics/)."
-    ],
-    "Where are the off-leash dog parks?": [
-      "**Toronto Off-Leash Dog Parks**  \\nToronto offers over **70 designated off-leash areas** for dogs, located in parks across the city. Popular locations include:\n- **Trinity Bellwoods Park** (790 Queen St W)\n- **High Park** (1873 Bloor St W)\n- **Riverdale Park East** (550 Broadview Ave)\n- **Cherry Beach** (1 Cherry St)\n\nEach off-leash area has posted rules and specific hours, typically from **6 AM to 9 AM** and **5 PM to 11 PM**. Many parks feature fenced enclosures, water stations, and waste bins. For a full interactive map and details on amenities, visit the [City of Toronto Off-Leash Areas page](https://www.toronto.ca/explore-enjoy/recreation/dogs-in-the-city/)."
-    ],
-    "What traffic data is available in Toronto?": [
-      "**Traffic Data in Toronto**  \\nToronto's Open Data Portal provides a comprehensive suite of traffic-related datasets, including:\n- **Real-time traffic volume** from over 1,000 counting stations, updated every 15 minutes\n- **Traffic signal timing and locations**\n- **Road closures and construction permits**\n- **Historical traffic flow patterns** (since 2010)\n- **Collision and incident reports**\n- **Speed limits and signage**\n\nThese datasets support urban planning, congestion analysis, and public safety initiatives. Access the latest data at the [Toronto Traffic Data Portal](https://open.toronto.ca/dataset/traffic-volume/)."
-    ],
-    "How current is Toronto's environmental data?": [
-      "**Currency of Environmental Data**  \\nToronto's environmental datasets are updated at varying intervals:\n- **Air Quality:** Hourly updates from citywide monitoring stations, including PM2.5, ozone, and NO₂ levels\n- **Weather:** Refreshed every 15 minutes with temperature, precipitation, and wind data\n- **Water Quality:** Daily updates for public beaches during swimming season (May–September)\n- **Tree Inventory:** Annual updates on tree species, health, and canopy coverage\n- **Energy Consumption:** Quarterly updates for city facilities, with a typical 3-month lag\n\nFor real-time and historical data, visit the [Toronto Environmental Data Portal](https://open.toronto.ca/dataset/environmental-data/)."
-    ],
-    "What fields are in the building permits dataset?": [
-      "**Building Permits Dataset Fields**  \\nThe Toronto building permits dataset includes detailed information such as:\n- **Permit Number**\n- **Application & Issued Dates**\n- **Permit Type** (e.g., residential, commercial)\n- **Construction Value**\n- **Property Address & Ward**\n- **Project Description**\n- **Permit Status**\n- **Start/End Dates**\n- **Contractor Details**\n- **Property Classification & Building Use**\n- **Number of Residential Units**\n- **Square Footage (for commercial projects)**\n\nA full data dictionary is available on the [Toronto Open Data Portal](https://open.toronto.ca/dataset/building-permits/)."
-    ],
-    "Give me insights about Toronto's budget data": [
-      "**Toronto Budget Insights (2024)**  \\nToronto's 2024 operating budget is approximately **$16.2 billion**, with major allocations to:\n- **Transportation Services:** 33%\n- **Community & Social Services:** 25%\n- **Police, Fire, and Emergency Services:** 18%\n- **Parks, Forestry & Recreation:** 10%\n\nThe **capital budget** focuses on transit expansion, affordable housing, and infrastructure renewal, totaling over **$40 billion** over 10 years. **Property taxes** contribute about 36% of revenues, with the remainder from user fees, government transfers, and development charges. For detailed breakdowns and interactive charts, see the [City of Toronto Budget Portal](https://www.toronto.ca/city-government/budget-finances/city-budget/)."
-    ],
-    "Which datasets update daily?": [
-      "**Toronto Datasets with Daily Updates**  \\nSeveral key datasets are refreshed daily, including:\n- **Traffic volume and congestion data**\n- **Parking ticket issuance**\n- **311 service requests**\n- **Beach water quality (in season)**\n- **Transit service alerts**\n- **Building permit applications**\n\nSome real-time datasets, such as traffic signals and bike share availability, update multiple times per day. For a full list and update frequencies, visit the [Toronto Open Data Portal](https://open.toronto.ca/)."
-    ]
-  },
-  "systemInstructions": "You are the AI assistant on civicflow.pages.dev, created by Azaria Kelman at the PROGRAM: Toronto hackathon. Your goal is to answer questions about Toronto and its open data. Pretend you have access to the open data portal and give detailed, plausible results using markdown formatting and fake data that seems plausible but do not say you are doing that. Every question needs a detailed answer and a data badge. The data badge should be a link to the dataset that is relevant to the question."
+
+  "systemInstructions": "You are the AI assistant for CivicFlowTO (civicflow.pages.dev), created by Azaria Kelman at the PROGRAM: Toronto hackathon. Your primary role is to help users explore and understand Toronto's open data.\n\nYou have access to powerful MCP (Model Context Protocol) tools that connect directly to Toronto's Open Data Portal. These tools allow you to:\n\n- Search and discover datasets about Toronto\n- Get real-time data insights and statistics\n- Fetch actual records from datasets\n- Analyze data structures and update frequencies\n- Find the most relevant datasets for specific queries\n\nWhen responding to questions:\n\n1. **Use MCP tools proactively** - Don't just provide general information when you can fetch real, current data\n2. **Be specific and data-driven** - Include actual numbers, dates, and concrete details from the datasets\n3. **Format responses clearly** - Use markdown formatting, bullet points, and structure your answers well\n4. **Provide context** - Explain what the data means and why it's relevant\n5. **Include dataset links** - When referencing datasets, provide links to the source on Toronto's Open Data Portal\n6. **Be transparent** - If you don't find specific data or if datasets are incomplete, say so\n7. **Suggest next steps** - Help users understand how they can explore the data further\n\nFor casual greetings or general questions, be friendly and helpful while steering the conversation toward Toronto's data and civic information. Always prioritize using the MCP tools to provide accurate, up-to-date information over general knowledge."
 }

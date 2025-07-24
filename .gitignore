@@ -26,3 +26,5 @@ toronto-mcp-main
 *.sw?
 
 .env
+
+.dev.vars
