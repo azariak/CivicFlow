@@ -49,6 +49,16 @@ function createTimeoutPromise(ms, errorMessage) {
   });
 }
 
+function formatHistoryForGemini(history) {
+  if (!history || !Array.isArray(history)) {
+    return [];
+  }
+  return history.map((message) => ({
+    role: message.role === "assistant" ? "model" : "user",
+    parts: [{ text: message.content }],
+  }));
+}
+
 async function connectToMCP(mcpServerUrl) {
   console.log("Connecting to MCP server:", mcpServerUrl);
 
@@ -106,13 +116,21 @@ function extractTextFromResponse(response) {
   return finalText || "Response received but no text content found";
 }
 
-async function generateWithGemini(ai, prompt, systemInstructions, mcpTool) {
+async function generateWithGemini(
+  ai,
+  prompt,
+  systemInstructions,
+  mcpTool,
+  history
+) {
   console.log("Sending request to Gemini with MCP tools");
+
+  const contents = [...history, { role: "user", parts: [{ text: prompt }] }];
 
   const generateContent = async () => {
     return ai.models.generateContent({
       model: "gemini-2.0-flash",
-      contents: prompt,
+      contents: contents,
       config: {
         systemInstruction: systemInstructions,
         tools: [mcpTool],
@@ -141,7 +159,7 @@ async function generateWithGemini(ai, prompt, systemInstructions, mcpTool) {
 export async function onRequestPost(context) {
   try {
     const { request, env } = context;
-    const { prompt, systemInstructions } = await request.json();
+    const { prompt, systemInstructions, history } = await request.json();
     const apiKey = env.GEMINI_API_KEY;
 
     // Validate required parameters
@@ -159,6 +177,8 @@ export async function onRequestPost(context) {
         500
       );
     }
+
+    const formattedHistory = formatHistoryForGemini(history);
 
     // Initialize MCP client
     let mcpClient = null;
@@ -192,7 +212,8 @@ export async function onRequestPost(context) {
         ai,
         prompt,
         systemInstructions,
-        mcpTool
+        mcpTool,
+        formattedHistory
       );
 
       return createStreamingResponse(finalText);

@@ -30,11 +30,16 @@
 - `public/` - Static assets (logos, icons, SVGs)
 
 ## TODO:
+Prelaunch:
 - Chat history
 - Readd animation
-- Add support for viewing embedded data, charts etc.. 
+- Stream AI responses
 - Purchase domain
-- Fix {"chunk":... \n"} bug when saying eg 'hi'
-- Merge 2 API Gemini paths in app.jsx and generate.js
+- Fix occasional {"chunk":... \n"} bug when saying eg 'hi'
 - Rename to DataFlow?
+- Remove/improve settings menu and local API key?
+- Fix bug when line is too long and spills past blue background
+
+- Add support for viewing embedded data, charts etc.. 
+- Merge 2 API Gemini paths in app.jsx and generate.js
 - Voice mode?

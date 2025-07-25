@@ -20,7 +20,6 @@ const PoweredByBadge = () => {
 
 const MessageList = ({ messages }) => {
   const markdownStyles = {
-    display: "inline",
     fontSize: "inherit",
     lineHeight: "inherit",
     margin: 0,
@@ -45,9 +44,7 @@ const MessageList = ({ messages }) => {
           <div className="markdown-content">
             <ReactMarkdown
               components={{
-                p: ({ children }) => (
-                  <span style={markdownStyles}>{children}</span>
-                ),
+                p: ({ children }) => <p style={markdownStyles}>{children}</p>,
                 a: ({ children, href }) => (
                   <a href={href} style={linkStyles}>
                     {children}

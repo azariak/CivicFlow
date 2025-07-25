@@ -110,12 +110,17 @@ const App = () => {
         console.log("Sending request to /api/generate:", {
           prompt: text,
           systemInstructions,
+          history: messages,
         });
 
         const response = await fetch("/api/generate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt: text, systemInstructions }),
+          body: JSON.stringify({
+            prompt: text,
+            systemInstructions,
+            history: messages,
+          }),
         });
 
         console.log("Response status:", response.status);
