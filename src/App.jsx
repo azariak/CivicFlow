@@ -366,9 +366,9 @@ const App = () => {
           isLoading={isLoading}
         />
 
-        <div className="ai-disclaimer">
-          AI responses are not perfect. Sometimes it makes stuff up.
-        </div>
+        {/* <div className="ai-disclaimer">
+          AI responses occasionally contain errors. 
+        </div> */}
       </div>
 
       <div className="footer">
