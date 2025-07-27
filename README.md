@@ -32,7 +32,6 @@
 ## TODO:
 Prelaunch:
 - Readd animation
-- Stream AI responses
 - Purchase domain
 - Rename to DataFlow?
 - Remove/improve settings menu and local API key?
@@ -41,3 +40,5 @@ Prelaunch:
 - Add support for viewing embedded data, charts etc.. 
 - Merge 2 API Gemini paths in app.jsx and generate.js
 - Voice mode?
+- Smoothen streaming
+- Non-text parts of functionResponse

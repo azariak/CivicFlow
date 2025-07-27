@@ -43,6 +43,34 @@ function createStreamingResponse(content) {
   return new Response(stream, { headers: STREAMING_HEADERS });
 }
 
+function createStreamingGenerator(generator, cleanupFn = null) {
+  const stream = new ReadableStream({
+    async start(controller) {
+      try {
+        for await (const chunk of generator) {
+          const data = `data: ${JSON.stringify({ chunk })}\n\n`;
+          controller.enqueue(new TextEncoder().encode(data));
+        }
+      } catch (error) {
+        const errorData = `data: ${JSON.stringify({ error: error.message })}\n\n`;
+        controller.enqueue(new TextEncoder().encode(errorData));
+      } finally {
+        // Call cleanup function if provided
+        if (cleanupFn) {
+          try {
+            await cleanupFn();
+          } catch (cleanupError) {
+            console.warn("Error during cleanup:", cleanupError.message);
+          }
+        }
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(stream, { headers: STREAMING_HEADERS });
+}
+
 function createTimeoutPromise(ms, errorMessage) {
   return new Promise((_, reject) => {
     setTimeout(() => reject(new Error(errorMessage)), ms);
@@ -116,19 +144,19 @@ function extractTextFromResponse(response) {
   return finalText || "Response received but no text content found";
 }
 
-async function generateWithGemini(
+async function* generateWithGemini(
   ai,
   prompt,
   systemInstructions,
   mcpTool,
   history
 ) {
-  console.log("Sending request to Gemini with MCP tools");
+  console.log("Sending request to Gemini with MCP tools for streaming");
 
   const contents = [...history, { role: "user", parts: [{ text: prompt }] }];
 
-  const generateContent = async () => {
-    return ai.models.generateContent({
+  const generateContentStream = async () => {
+    return ai.models.generateContentStream({
       model: "gemini-2.0-flash",
       contents: contents,
       config: {
@@ -143,17 +171,33 @@ async function generateWithGemini(
     "Gemini API timeout"
   );
 
-  const response = await Promise.race([generateContent(), timeoutPromise]);
-  console.log("Received response from Gemini");
+  const responseStream = await Promise.race([generateContentStream(), timeoutPromise]);
+  console.log("Received streaming response from Gemini");
 
-  const finalText = extractTextFromResponse(response);
+  try {
+    for await (const chunk of responseStream) {
+      // Extract text from the chunk (similar to extractTextFromResponse but for chunks)
+      let chunkText = "";
+      
+      if (chunk.text) {
+        chunkText = chunk.text;
+      } else if (chunk.candidates?.[0]?.content?.parts) {
+        const parts = chunk.candidates[0].content.parts;
+        for (const part of parts) {
+          if (part.text) {
+            chunkText += part.text;
+          }
+        }
+      }
 
-  // Log MCP function calling history for debugging
-  if (response.automaticFunctionCallingHistory) {
-    console.log("MCP function calling history available");
+      if (chunkText) {
+        yield chunkText;
+      }
+    }
+  } catch (error) {
+    console.error("Error during streaming:", error);
+    throw error;
   }
-
-  return finalText;
 }
 
 export async function onRequestPost(context) {
@@ -208,7 +252,7 @@ export async function onRequestPost(context) {
     const ai = new GoogleGenAI({ apiKey });
 
     try {
-      const finalText = await generateWithGemini(
+      const streamGenerator = generateWithGemini(
         ai,
         prompt,
         systemInstructions,
@@ -216,14 +260,21 @@ export async function onRequestPost(context) {
         formattedHistory
       );
 
-      return createStreamingResponse(finalText);
+      // Create cleanup function for MCP client
+      const cleanupMcp = async () => {
+        if (mcpClient) {
+          try {
+            await mcpClient.close();
+          } catch (closeError) {
+            console.warn("Error closing MCP client:", closeError.message);
+          }
+        }
+      };
+
+      return createStreamingGenerator(streamGenerator, cleanupMcp);
     } catch (genAIError) {
       console.error("GenAI error with MCP tools:", genAIError.message);
-      return createStreamingResponse(
-        `Error generating response: ${genAIError.message}`
-      );
-    } finally {
-      // Clean up MCP connection
+      // Clean up immediately on error
       if (mcpClient) {
         try {
           await mcpClient.close();
@@ -231,6 +282,9 @@ export async function onRequestPost(context) {
           console.warn("Error closing MCP client:", closeError.message);
         }
       }
+      return createStreamingResponse(
+        `Error generating response: ${genAIError.message}`
+      );
     }
   } catch (error) {
     console.error("API error:", error.message);
