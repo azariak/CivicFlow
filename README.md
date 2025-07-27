@@ -13,7 +13,7 @@
 1. Clone the repository: `git clone https://github.com/azariak/CivicFlow.git`
 2. Install dependencies: `npm install`
 3. Run the project: `npm run dev`
-4. Input your Gemini API Key in settings (or configure a .env when that's set up)
+4. Configure `.dev.vars` basefd on `.dev.vars.example`
 
 ## Code Layout
   - `App.jsx` - Core application with most stuff (including Gemini calls when using API key in settings)
@@ -31,11 +31,9 @@
 
 ## TODO:
 Prelaunch:
-- Chat history
 - Readd animation
 - Stream AI responses
 - Purchase domain
-- Fix occasional {"chunk":... \n"} bug when saying eg 'hi'
 - Rename to DataFlow?
 - Remove/improve settings menu and local API key?
 - Fix bug when line is too long and spills past blue background

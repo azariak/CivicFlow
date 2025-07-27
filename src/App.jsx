@@ -63,8 +63,6 @@ const App = () => {
   }, [messages]);
 
   const sendMessage = async (text = inputMessage, retryCount = 0) => {
-    console.log("=== sendMessage called with:", text);
-
     if (text.trim() === "" || isLoading) return;
 
     const userMessage = { role: "user", content: text };
@@ -75,11 +73,8 @@ const App = () => {
     setInputMessage("");
     setIsLoading(true);
 
-    console.log("=== Messages updated, starting API call");
-
     // Helper function to update the last message (assistant's response)
     const updateLastMessage = (chunk) => {
-      console.log("=== updateLastMessage called with chunk:", chunk);
       setMessages((prev) =>
         prev.map((msg, index) =>
           index === prev.length - 1
@@ -107,12 +102,6 @@ const App = () => {
 
       // --- Server API Streaming ---
       try {
-        console.log("Sending request to /api/generate:", {
-          prompt: text,
-          systemInstructions,
-          history: messages,
-        });
-
         const response = await fetch("/api/generate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -122,12 +111,6 @@ const App = () => {
             history: messages,
           }),
         });
-
-        console.log("Response status:", response.status);
-        console.log(
-          "Response headers:",
-          Object.fromEntries(response.headers.entries())
-        );
 
         if (!response.ok) {
           let errorData;
@@ -155,46 +138,44 @@ const App = () => {
           .getReader();
 
         let reading = true;
-        let totalChunks = 0;
-        let totalContent = "";
-
-        console.log("Starting to read stream...");
+        let buffer = "";
 
         while (reading) {
-          console.log("About to read from stream...");
           const { value, done } = await reader.read();
-          console.log(
-            "Read result - done:",
-            done,
-            "value length:",
-            value?.length
-          );
 
           if (done) {
             streamEnded = true;
             reading = false;
-            console.log("Stream ended. Total chunks received:", totalChunks);
-            console.log("Total content length:", totalContent.length);
+            // Process any remaining data in the buffer
+            if (buffer.trim()) {
+              console.warn("Remaining buffer content:", buffer);
+              updateLastMessage(buffer); // Treat as plain text
+            }
             break;
           }
 
-          console.log("Raw stream value:", value);
+          buffer += value;
 
-          // Process SSE data format: data: {...}\n\n
-          const lines = value.split("\n");
-          for (const line of lines) {
+          // Process buffer line by line for SSE data
+          let newlineIndex;
+          while ((newlineIndex = buffer.indexOf("\n")) !== -1) {
+            const line = buffer.slice(0, newlineIndex);
+            buffer = buffer.slice(newlineIndex + 1);
+
+            if (line.trim() === "") continue;
+
             if (line.startsWith("data:")) {
               try {
                 const jsonData = line.substring(5).trim();
-                console.log("Processing SSE data:", jsonData);
 
+                if (jsonData === "[DONE]") {
+                  // Optional: Handle a specific end-of-stream signal if your backend sends one
+                  continue;
+                }
+                
                 const json = JSON.parse(jsonData);
-                console.log("Parsed JSON:", json);
 
                 if (json.chunk) {
-                  totalChunks++;
-                  totalContent += json.chunk;
-                  console.log(`Chunk ${totalChunks}:`, json.chunk);
                   updateLastMessage(json.chunk);
                 } else if (json.error) {
                   console.error("SSE error received:", json);
@@ -204,12 +185,10 @@ const App = () => {
                 }
               } catch (e) {
                 console.error("Error parsing SSE line:", line, e);
-                // If it's not valid JSON, treat the entire line as plain text response
-                const plainText = line.substring(5).trim();
-                if (plainText) {
-                  console.log("Treating as plain text:", plainText);
-                  updateLastMessage(plainText);
-                }
+                // The chunk might be incomplete, so we leave it in the buffer
+                // and prepend the line back to the buffer to be processed with the next chunk.
+                buffer = line + buffer;
+                break; // Exit the while loop to wait for more data from the stream
               }
             } else if (line.startsWith("event: error")) {
               console.error("Error event received:", line);
@@ -217,7 +196,6 @@ const App = () => {
               // The data line following this should contain the error details
             } else if (line.trim() && !line.startsWith("data:")) {
               // Handle plain text responses that aren't in SSE format
-              console.log("Plain text response:", line);
               updateLastMessage(line + "\n");
             }
           }
@@ -231,11 +209,6 @@ const App = () => {
             error.message.includes("Unexpected token")) &&
           retryCount < 3
         ) {
-          console.log(
-            `Worker restarted - retrying request (attempt ${
-              retryCount + 1
-            }/3)...`
-          );
           // Retry the request after a short delay
           setTimeout(() => {
             sendMessage(text, retryCount + 1);
