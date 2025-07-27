@@ -31,7 +31,6 @@
 
 ## TODO:
 Prelaunch:
-- Readd animation
 - Purchase domain
 - Rename to DataFlow?
 - Remove/improve settings menu and local API key?

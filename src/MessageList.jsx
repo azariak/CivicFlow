@@ -1,6 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import MetadataDropdown from "./MetadataDropdown";
+import LoadingAnimation from "./LoadingAnimation";
 
 const PoweredByBadge = () => {
   return (
@@ -19,7 +20,7 @@ const PoweredByBadge = () => {
   );
 };
 
-const MessageList = ({ messages, isLoading }) => {
+const MessageList = ({ messages, isLoading, streamingStarted }) => {
   const markdownStyles = {
     fontSize: "inherit",
     lineHeight: "inherit",
@@ -65,6 +66,7 @@ const MessageList = ({ messages, isLoading }) => {
           {msg.role === "assistant" && msg.showDataBadge && <PoweredByBadge />}
         </div>
       ))}
+      {isLoading && !streamingStarted && <LoadingAnimation />}
     </div>
   );
 };

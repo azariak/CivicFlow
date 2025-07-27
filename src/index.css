@@ -1200,3 +1200,219 @@ body {
     height: 12px;
   }
 }
+
+/* Loading Animation Styles */
+.loading-animation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0.5rem 0 1rem 0;
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.loading-animation {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  max-width: 60%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  min-height: 50px;
+  margin-left: 0.5rem;
+  opacity: 0.8;
+}
+
+.loading-animation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+  animation: shimmer 3s infinite;
+}
+
+.loading-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.loading-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--text-blue);
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.loading-toronto-logo {
+  width: 14px;
+  height: 14px;
+  filter: brightness(0) invert(1);
+}
+
+/* Logo rotation removed - keeping static logo */
+
+.loading-text-container {
+  flex: 1;
+}
+
+.loading-title {
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  margin-bottom: 0.15rem;
+  letter-spacing: 0.01em;
+}
+
+.loading-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.loading-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  justify-content: center;
+}
+
+.loading-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--text-secondary);
+  animation: pulse 2s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.loading-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Animations */
+
+@keyframes pulse {
+  0%, 80%, 100% {
+    transform: scale(0.7);
+    opacity: 0.3;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark mode adjustments for loading animation */
+.dark .loading-animation {
+  background: var(--card-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dark .loading-animation::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.02), transparent);
+}
+
+.dark .loading-logo-container {
+  background: var(--text-blue);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Light mode adjustments for loading animation */
+.light .loading-animation {
+  background: var(--card-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.light .loading-animation::before {
+  background: linear-gradient(90deg, transparent, rgba(0, 56, 150, 0.02), transparent);
+}
+
+.light .loading-logo-container {
+  background: var(--text-blue);
+  box-shadow: 0 1px 3px rgba(0, 56, 150, 0.1);
+}
+
+/* Mobile responsiveness for loading animation */
+@media (max-width: 768px) {
+  .loading-animation {
+    max-width: 70%;
+    padding: 0.5rem 0.6rem;
+    min-height: 45px;
+    margin-left: 0.25rem;
+  }
+  
+  .loading-header {
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .loading-logo-container {
+    width: 20px;
+    height: 20px;
+    padding: 3px;
+  }
+  
+  .loading-toronto-logo {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .loading-title {
+    font-size: 0.7rem;
+  }
+  
+  .loading-subtitle {
+    font-size: 0.6rem;
+  }
+  
+  .loading-dots {
+    gap: 0.25rem;
+  }
+  
+  .loading-dot {
+    width: 3px;
+    height: 3px;
+  }
+}

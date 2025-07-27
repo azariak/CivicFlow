@@ -31,6 +31,7 @@ const App = () => {
   ]);
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [streamingStarted, setStreamingStarted] = useState(false);
   const [suggestedQuestions, setSuggestedQuestions] = useState(
     questionsAndAnswers.suggestedQuestions
   );
@@ -51,6 +52,7 @@ const App = () => {
     ]);
     setInputMessage("");
     setIsLoading(false);
+    setStreamingStarted(false);
     setSuggestedQuestions(
       shuffleArray([...questionsAndAnswers.suggestedQuestions])
     );
@@ -74,9 +76,13 @@ const App = () => {
     setMessages((prev) => [...prev, userMessage, assistantPlaceholder]);
     setInputMessage("");
     setIsLoading(true);
+    setStreamingStarted(false);
 
     // Helper function to update the last message (assistant's response)
     const updateLastMessage = (chunk, metadata = null) => {
+      // Always mark streaming as started when we receive content
+      setStreamingStarted(true);
+      
       setMessages((prev) =>
         prev.map((msg, index) =>
           index === prev.length - 1
@@ -106,6 +112,7 @@ const App = () => {
     // Helper function to handle API errors
     const handleApiError = async (errorMessage) => {
       console.error("API error:", errorMessage);
+      setStreamingStarted(true); // Hide animation on error too
       setMessages((prev) =>
         prev.map((msg, index) =>
           index === prev.length - 1
@@ -339,7 +346,11 @@ const App = () => {
         </header>
 
         <main className="chat-container">
-          <MessageList messages={messages} isLoading={isLoading} />
+          <MessageList 
+            messages={messages} 
+            isLoading={isLoading} 
+            streamingStarted={streamingStarted} 
+          />
           <div ref={messagesEndRef} />
         </main>
 
