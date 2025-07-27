@@ -47,7 +47,12 @@ const MessageList = ({ messages, isLoading }) => {
               components={{
                 p: ({ children }) => <p style={markdownStyles}>{children}</p>,
                 a: ({ children, href }) => (
-                  <a href={href} style={linkStyles}>
+                  <a 
+                    href={href} 
+                    style={linkStyles}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {children}
                   </a>
                 ),
