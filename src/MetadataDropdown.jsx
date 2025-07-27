@@ -25,18 +25,36 @@ const MetadataDropdown = ({ metadata }) => {
 
   if (!hasContent) return null;
 
+  const hasFunctionCalls = metadata.functionCalls?.length > 0;
+
   return (
     <div className="metadata-dropdown">
-      <button 
-        className="metadata-toggle"
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle AI metadata"
-        title="View AI processing details"
-      >
-        <span className="metadata-icon">⚙️</span>
-        <span className="metadata-label">AI Details</span>
-        <span className={`metadata-arrow ${isOpen ? 'open' : ''}`}>▼</span>
-      </button>
+      <div className="metadata-header">
+        <button 
+          className="metadata-toggle"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle AI metadata"
+          title="View AI processing details"
+        >
+          <span className="metadata-icon">⚙️</span>
+          <span className="metadata-label">AI Details</span>
+          <span className={`metadata-arrow ${isOpen ? 'open' : ''}`}>▼</span>
+        </button>
+        
+        {hasFunctionCalls && (
+          <div className="metadata-badge">
+            <a 
+              href="https://www.toronto.ca/city-government/data-research-maps/open-data/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="metadata-badge-content"
+            >
+              <img src="/TorontoLogo.svg" alt="Toronto Logo" className="metadata-badge-logo" width={14} height={14} />
+              <span className="metadata-badge-text">City of Toronto Open Data</span>
+            </a>
+          </div>
+        )}
+      </div>
       
       {isOpen && (
         <div className="metadata-content">

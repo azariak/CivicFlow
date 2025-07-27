@@ -1118,3 +1118,85 @@ body {
     padding: 1px 3px;
   }
 }
+
+/* Metadata Badge Styles */
+.metadata-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.metadata-badge {
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.metadata-badge:hover {
+  opacity: 0.8;
+}
+
+.metadata-badge-content {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.metadata-badge-logo {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+.metadata-badge-text {
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* Dark mode adjustments for metadata badge */
+.dark .metadata-badge-text {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .metadata-badge-logo {
+  filter: brightness(0) invert(1);
+}
+
+/* Light mode adjustments for metadata badge */
+.light .metadata-badge-text {
+  color: var(--text-primary);
+}
+
+.light .metadata-badge-logo {
+  filter: brightness(0) invert(1);
+}
+
+/* Mobile responsiveness for metadata badge */
+@media (max-width: 768px) {
+  .metadata-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  
+  .metadata-badge {
+    align-self: flex-end;
+  }
+  
+  .metadata-badge-content {
+    font-size: 0.65rem;
+    gap: 0.25rem;
+  }
+  
+  .metadata-badge-logo {
+    width: 12px;
+    height: 12px;
+  }
+}

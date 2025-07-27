@@ -38,7 +38,6 @@ Prelaunch:
 - Fix bug when line is too long and spills past blue background
 - Deal with rate limits (and render the error correctly)
 - MD rendering within AI details?
-
 - Scroll when AI details is clicked
 - Adjust systemPrompt for click here for links
 - Add support for viewing embedded data, charts etc.. 
@@ -46,3 +45,4 @@ Prelaunch:
 - Voice mode?
 - Smoothen streaming
 - Non-text parts of functionResponse
+- Add more details button that allows you to get actual data
