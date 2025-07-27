@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const MetadataDropdown = ({ metadata }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState(null);
+  const dropdownRef = useRef(null);
 
   if (!metadata || (!metadata.functionCalls?.length && !metadata.hasNonTextParts && !metadata.usageMetadata)) {
     return null;
@@ -27,8 +28,17 @@ const MetadataDropdown = ({ metadata }) => {
 
   const hasFunctionCalls = metadata.functionCalls?.length > 0;
 
+  useEffect(() => {
+    if (isOpen && dropdownRef.current) {
+      dropdownRef.current.scrollIntoView({ 
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  }, [isOpen]);
+
   return (
-    <div className="metadata-dropdown">
+    <div className="metadata-dropdown" ref={dropdownRef}>
       <div className="metadata-header">
         <button 
           className="metadata-toggle"

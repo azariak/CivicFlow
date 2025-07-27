@@ -38,7 +38,6 @@ Prelaunch:
 - Fix bug when line is too long and spills past blue background
 - Deal with rate limits (and render the error correctly)
 - MD rendering within AI details?
-- Scroll when AI details is clicked
 
 - Add support for viewing embedded data, charts etc.. 
 - Merge 2 API Gemini paths in app.jsx and generate.js
