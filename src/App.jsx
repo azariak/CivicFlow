@@ -62,7 +62,7 @@ const App = () => {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, isLoading]);
 
   const sendMessage = async (text = inputMessage, retryCount = 0) => {
     if (text.trim() === "" || isLoading) return;
