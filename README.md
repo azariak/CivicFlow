@@ -36,7 +36,9 @@ Prelaunch:
 - Rename to DataFlow?
 - Remove/improve settings menu and local API key?
 - Fix bug when line is too long and spills past blue background
+- MD rendering within AI details
 
+- Adjust systemPrompt for click here for links
 - Add support for viewing embedded data, charts etc.. 
 - Merge 2 API Gemini paths in app.jsx and generate.js
 - Voice mode?

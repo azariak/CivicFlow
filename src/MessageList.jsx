@@ -1,5 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import MetadataDropdown from "./MetadataDropdown";
 
 const PoweredByBadge = () => {
   return (
@@ -18,7 +19,7 @@ const PoweredByBadge = () => {
   );
 };
 
-const MessageList = ({ messages }) => {
+const MessageList = ({ messages, isLoading }) => {
   const markdownStyles = {
     fontSize: "inherit",
     lineHeight: "inherit",
@@ -55,6 +56,7 @@ const MessageList = ({ messages }) => {
               {msg.content}
             </ReactMarkdown>
           </div>
+          {msg.role === "assistant" && msg.metadata && !(index === messages.length - 1 && isLoading) && <MetadataDropdown metadata={msg.metadata} />}
           {msg.role === "assistant" && msg.showDataBadge && <PoweredByBadge />}
         </div>
       ))}

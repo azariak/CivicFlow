@@ -824,3 +824,295 @@ body {
     gap: 0.4rem;
   }
 }
+
+/* Metadata Dropdown Styles */
+.metadata-dropdown {
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+.metadata-toggle {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.metadata-toggle:hover {
+  opacity: 1;
+  background: var(--bg-secondary);
+  border-color: var(--text-secondary);
+}
+
+.metadata-icon {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+.metadata-label {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.metadata-arrow {
+  font-size: 8px;
+  transition: transform 0.2s ease;
+}
+
+.metadata-arrow.open {
+  transform: rotate(180deg);
+}
+
+.metadata-content {
+  margin-top: 8px;
+  padding: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.metadata-section {
+  margin-bottom: 12px;
+}
+
+.metadata-section:last-child {
+  margin-bottom: 0;
+}
+
+.metadata-section h4 {
+  margin: 0 0 6px 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.function-call {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 6px;
+}
+
+.function-call:last-child {
+  margin-bottom: 0;
+}
+
+.function-call-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.function-call strong {
+  color: var(--text-primary);
+  font-size: 11px;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.copy-btn:hover {
+  opacity: 1;
+  background: var(--bg-secondary);
+}
+
+.copy-btn.copied {
+  opacity: 1;
+  color: #10b981;
+  transform: scale(1.1);
+}
+
+.copy-btn.copied:hover {
+  background: none;
+}
+
+.function-args,
+.function-response {
+  margin: 4px 0 0 0;
+  padding: 6px;
+  background: var(--bg-secondary);
+  border-radius: 3px;
+  font-size: 10px;
+  font-family: 'Courier New', monospace;
+  color: var(--text-secondary);
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+}
+
+.usage-stats div {
+  padding: 2px 0;
+  color: var(--text-secondary);
+}
+
+.safety-rating {
+  padding: 2px 0;
+  color: var(--text-secondary);
+}
+
+.safety-rating strong {
+  color: var(--text-primary);
+}
+
+/* Light mode adjustments for metadata */
+.light .metadata-toggle {
+  color: #ffffff;
+  border-color: #e2e8f0;
+}
+
+.light .metadata-toggle:hover {
+  background: #f7fafc;
+  border-color: #4a5568;
+  color: #2d3748;
+}
+
+.light .metadata-content {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  color: #2d3748;
+}
+
+.light .metadata-section h4 {
+  color: #2b6cb0;
+}
+
+.light .function-call {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+
+.light .function-call strong {
+  color: #2d3748;
+}
+
+.light .function-args,
+.light .function-response {
+  background: #f1f5f9;
+  border-color: #cbd5e0;
+  color: #4a5568;
+}
+
+.light .usage-stats div {
+  color: #4a5568;
+}
+
+.light .safety-rating {
+  color: #4a5568;
+}
+
+.light .safety-rating strong {
+  color: #2d3748;
+}
+
+.light .copy-btn:hover {
+  background: #f1f5f9;
+}
+
+.light .copy-btn.copied {
+  color: #059669;
+}
+
+/* Dark mode adjustments for metadata */
+.dark .metadata-toggle {
+  color: #e2e8f0;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark .metadata-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #f7fafc;
+}
+
+.dark .metadata-content {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+}
+
+.dark .metadata-section h4 {
+  color: #63b3ed;
+}
+
+.dark .function-call {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .function-call strong {
+  color: #f7fafc;
+}
+
+.dark .function-args,
+.dark .function-response {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.06);
+  color: #cbd5e0;
+}
+
+.dark .usage-stats div {
+  color: #cbd5e0;
+}
+
+.dark .safety-rating {
+  color: #cbd5e0;
+}
+
+.dark .safety-rating strong {
+  color: #f7fafc;
+}
+
+.dark .copy-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark .copy-btn.copied {
+  color: #34d399;
+}
+
+/* Mobile responsiveness for metadata */
+@media (max-width: 768px) {
+  .metadata-toggle {
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+  
+  .metadata-content {
+    font-size: 11px;
+    padding: 10px;
+  }
+  
+  .function-args,
+  .function-response {
+    font-size: 9px;
+  }
+  
+  .copy-btn {
+    font-size: 11px;
+    padding: 1px 3px;
+  }
+}

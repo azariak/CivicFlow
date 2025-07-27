@@ -21,11 +21,12 @@ const App = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "Hi there! Welcome to CivicFlowTO!" },
+    { role: "assistant", content: "Hi there! Welcome to CivicFlowTO!", metadata: null },
     {
       role: "assistant",
       content:
         "What would you like to know about Toronto and its [open data](https://www.toronto.ca/city-government/data-research-maps/open-data/)?",
+      metadata: null,
     },
   ]);
   const [inputMessage, setInputMessage] = useState("");
@@ -40,11 +41,12 @@ const App = () => {
   // Reset function to reset the chat to initial state
   const resetChat = () => {
     setMessages([
-      { role: "assistant", content: "Hi there! Welcome to CivicFlowTO!" },
+      { role: "assistant", content: "Hi there! Welcome to CivicFlowTO!", metadata: null },
       {
         role: "assistant",
         content:
           "What would you like to know about Toronto and its [open data](https://www.toronto.ca/city-government/data-research-maps/open-data/)?",
+        metadata: null,
       },
     ]);
     setInputMessage("");
@@ -65,8 +67,8 @@ const App = () => {
   const sendMessage = async (text = inputMessage, retryCount = 0) => {
     if (text.trim() === "" || isLoading) return;
 
-    const userMessage = { role: "user", content: text };
-    const assistantPlaceholder = { role: "assistant", content: "" };
+    const userMessage = { role: "user", content: text, metadata: null };
+    const assistantPlaceholder = { role: "assistant", content: "", metadata: null };
 
     // Add user message and placeholder for assistant response
     setMessages((prev) => [...prev, userMessage, assistantPlaceholder]);
@@ -74,14 +76,31 @@ const App = () => {
     setIsLoading(true);
 
     // Helper function to update the last message (assistant's response)
-    const updateLastMessage = (chunk) => {
+    const updateLastMessage = (chunk, metadata = null) => {
       setMessages((prev) =>
         prev.map((msg, index) =>
           index === prev.length - 1
-            ? { ...msg, content: msg.content + chunk }
+            ? { 
+                ...msg, 
+                content: msg.content + chunk,
+                metadata: metadata ? 
+                  (msg.metadata ? mergeMetadata(msg.metadata, metadata) : metadata) : 
+                  msg.metadata
+              }
             : msg
         )
       );
+    };
+
+    // Helper function to merge metadata from multiple chunks
+    const mergeMetadata = (existing, incoming) => {
+      return {
+        functionCalls: [...(existing.functionCalls || []), ...(incoming.functionCalls || [])],
+        safetyRatings: incoming.safetyRatings || existing.safetyRatings || [],
+        finishReason: incoming.finishReason || existing.finishReason,
+        usageMetadata: incoming.usageMetadata || existing.usageMetadata,
+        hasNonTextParts: existing.hasNonTextParts || incoming.hasNonTextParts || false
+      };
     };
 
     // Helper function to handle API errors
@@ -175,8 +194,8 @@ const App = () => {
                 
                 const json = JSON.parse(jsonData);
 
-                if (json.chunk) {
-                  updateLastMessage(json.chunk);
+                if (json.chunk !== undefined) {
+                  updateLastMessage(json.chunk, json.metadata);
                 } else if (json.error) {
                   console.error("SSE error received:", json);
                   throw new Error(
@@ -320,7 +339,7 @@ const App = () => {
         </header>
 
         <main className="chat-container">
-          <MessageList messages={messages} />
+          <MessageList messages={messages} isLoading={isLoading} />
           <div ref={messagesEndRef} />
         </main>
 

@@ -47,8 +47,20 @@ function createStreamingGenerator(generator, cleanupFn = null) {
   const stream = new ReadableStream({
     async start(controller) {
       try {
-        for await (const chunk of generator) {
-          const data = `data: ${JSON.stringify({ chunk })}\n\n`;
+        for await (const chunkData of generator) {
+          // Handle both old string format and new object format
+          let responseData;
+          if (typeof chunkData === 'string') {
+            responseData = { chunk: chunkData };
+          } else {
+            // New format with text and metadata
+            responseData = { 
+              chunk: chunkData.text || '',
+              metadata: chunkData.metadata || null
+            };
+          }
+          
+          const data = `data: ${JSON.stringify(responseData)}\n\n`;
           controller.enqueue(new TextEncoder().encode(data));
         }
       } catch (error) {
@@ -176,8 +188,15 @@ async function* generateWithGemini(
 
   try {
     for await (const chunk of responseStream) {
-      // Extract text from the chunk (similar to extractTextFromResponse but for chunks)
+      // Extract both text and metadata from the chunk
       let chunkText = "";
+      const metadata = {
+        functionCalls: [],
+        safetyRatings: [],
+        finishReason: null,
+        usageMetadata: null,
+        hasNonTextParts: false
+      };
       
       if (chunk.text) {
         chunkText = chunk.text;
@@ -186,12 +205,40 @@ async function* generateWithGemini(
         for (const part of parts) {
           if (part.text) {
             chunkText += part.text;
+          } else {
+            // Capture non-text parts (function calls, etc.)
+            metadata.hasNonTextParts = true;
+            if (part.functionCall) {
+              metadata.functionCalls.push(part.functionCall);
+            }
+            if (part.functionResponse) {
+              metadata.functionCalls.push({
+                type: 'response',
+                ...part.functionResponse
+              });
+            }
           }
         }
       }
 
-      if (chunkText) {
-        yield chunkText;
+      // Capture additional metadata from the chunk
+      if (chunk.candidates?.[0]) {
+        const candidate = chunk.candidates[0];
+        if (candidate.safetyRatings) {
+          metadata.safetyRatings = candidate.safetyRatings;
+        }
+        if (candidate.finishReason) {
+          metadata.finishReason = candidate.finishReason;
+        }
+      }
+
+      if (chunk.usageMetadata) {
+        metadata.usageMetadata = chunk.usageMetadata;
+      }
+
+      // Yield an object with both text and metadata
+      if (chunkText || metadata.hasNonTextParts || metadata.functionCalls.length > 0) {
+        yield { text: chunkText, metadata };
       }
     }
   } catch (error) {
