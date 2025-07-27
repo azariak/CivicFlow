@@ -39,7 +39,7 @@ Prelaunch:
 - Deal with rate limits (and render the error correctly)
 - MD rendering within AI details?
 - Scroll when AI details is clicked
-- Adjust systemPrompt for click here for links
+
 - Add support for viewing embedded data, charts etc.. 
 - Merge 2 API Gemini paths in app.jsx and generate.js
 - Voice mode?

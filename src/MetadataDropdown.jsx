@@ -36,7 +36,7 @@ const MetadataDropdown = ({ metadata }) => {
           aria-label="Toggle AI metadata"
           title="View AI processing details"
         >
-          <span className="metadata-icon">⚙️</span>
+          <span className="metadata-icon">🤖</span>
           <span className="metadata-label">AI Details</span>
           <span className={`metadata-arrow ${isOpen ? 'open' : ''}`}>▼</span>
         </button>

@@ -297,13 +297,13 @@ const App = () => {
             <img src="/Moon.svg" alt="Moon" width={35} height={35} />
           )}
         </button>
-        <button
+        {/* <button
           className="control-button"
           onClick={() => setIsSettingsOpen(true)}
           aria-label="Open Settings"
         >
           <img src="/Settings.svg" alt="Settings" width={20} height={20} />
-        </button>
+        </button> */}
       </div>
 
       <SettingsModal
