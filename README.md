@@ -1,4 +1,4 @@
-# CivicFlowTO
+# DataFlowTO
 ## Create by Azaria Kelman @ PROGRAM: Toronto Hackathon
 
 ### Demo version that uses some hard-coded data. Full MCP version coming soon.
@@ -32,11 +32,12 @@
 ## TODO:
 Prelaunch:
 - Purchase domain
-- Rename to DataFlow?
 - Remove/improve settings menu and local API key?
 - Fix bug when line is too long and spills past blue background
 - Deal with rate limits (and render the error correctly)
 - MD rendering within AI details?
+- Shows fewer results then on opendata website
+- Rename to DataFlow
 
 - Add support for viewing embedded data, charts etc.. 
 - Merge 2 API Gemini paths in app.jsx and generate.js
@@ -44,3 +45,4 @@ Prelaunch:
 - Smoothen streaming
 - Non-text parts of functionResponse
 - Add more details button that allows you to get actual data
+- https://open.toronto.ca/toronto-open-data-awards-2025/

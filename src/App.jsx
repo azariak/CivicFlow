@@ -21,7 +21,7 @@ const App = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "Hi there! Welcome to CivicFlowTO!", metadata: null },
+    { role: "assistant", content: "Hi there! Welcome to DataFlowTO!", metadata: null },
     {
       role: "assistant",
       content:
@@ -42,7 +42,7 @@ const App = () => {
   // Reset function to reset the chat to initial state
   const resetChat = () => {
     setMessages([
-      { role: "assistant", content: "Hi there! Welcome to CivicFlowTO!", metadata: null },
+      { role: "assistant", content: "Hi there! Welcome to DataFlowTO!", metadata: null },
       {
         role: "assistant",
         content:
