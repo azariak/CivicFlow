@@ -1,13 +1,11 @@
 # DataFlowTO
 ## Create by Azaria Kelman @ PROGRAM: Toronto Hackathon
 
-### Demo version that uses some hard-coded data. Full MCP version coming soon.
-
 ## Key features
 - AI-powered chat interface for querying Toronto's open data and city services using MCP
 - Suggested questions to demonstrate how to use it
-- Markdown formatting support for text responses
-- Help menu, add Gemini API key in settings, dark/light theme
+- Markdown formatting, streaming support for text responses
+- Help menu, dark/light theme, settings API key (deprecated)
 
 ## Installation and configuration instructions 
 1. Clone the repository: `git clone https://github.com/azariak/CivicFlow.git`
@@ -36,8 +34,10 @@ Prelaunch:
 - Fix bug when line is too long and spills past blue background
 - Deal with rate limits (and render the error correctly)
 - MD rendering within AI details?
-- Shows fewer results then on opendata website
+- Shows fewer results then on opendata website (total found vs returned_count?)
 - Rename to DataFlow
+- Better MD formatting instructions in systemInstructions
+- Stop autoscroll fighting when scrolling up during generation
 
 - Add support for viewing embedded data, charts etc.. 
 - Merge 2 API Gemini paths in app.jsx and generate.js
@@ -46,3 +46,4 @@ Prelaunch:
 - Non-text parts of functionResponse
 - Add more details button that allows you to get actual data
 - https://open.toronto.ca/toronto-open-data-awards-2025/
+- Dead links provided via MCP see: ice rinks https://www.toronto.ca/data/parks/prd/facilities/outdoor-rinks/index.html\
