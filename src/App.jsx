@@ -440,7 +440,7 @@ const App = () => {
                 aria-label="Reset container size"
                 title="Reset to default size"
               >
-                ⤢
+                ↻
               </button>
             )}
             <div 
