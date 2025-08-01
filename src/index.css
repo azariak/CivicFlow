@@ -1416,3 +1416,114 @@ body {
     height: 3px;
   }
 }
+
+/* Resize Controls Styles */
+.resize-controls {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 10;
+}
+
+.size-reset-button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 10px;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  align-self: flex-end;
+  margin-right: -2px;
+  margin-bottom: -4px;
+  transform: scale(0.8);
+}
+
+.resize-handle {
+  width: 16px;
+  height: 16px;
+  cursor: nw-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  opacity: 0.4;
+  user-select: none;
+  padding: 2px;
+}
+
+.resize-handle:hover {
+  opacity: 0.8;
+}
+
+.resize-handle.resizing {
+  opacity: 1;
+}
+
+.resize-dots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
+.resize-dot {
+  width: 2px;
+  height: 2px;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.resize-dot-visible {
+  background-color: var(--text-secondary);
+}
+
+.resize-dot:nth-child(6) {
+  background-color: var(--text-secondary);
+}
+
+.resize-handle:hover .resize-dot-visible,
+.resize-handle:hover .resize-dot:nth-child(6) {
+  background-color: var(--text);
+}
+
+.resize-handle.resizing .resize-dot-visible,
+.resize-handle.resizing .resize-dot:nth-child(6) {
+  background-color: var(--button);
+}
+
+/* Show and highlight reset button when hovering over resize area */
+.resize-controls:hover .size-reset-button {
+  opacity: 0.6;
+  color: var(--text-secondary);
+  transform: scale(1);
+}
+
+.size-reset-button:hover {
+  opacity: 0.8;
+  color: var(--text);
+  transform: scale(1.1);
+}
+
+/* Prevent text selection while resizing */
+.container.resizing {
+  user-select: none;
+}
+
+/* Smooth resize cursor for the entire container when resizing */
+.container.resizing * {
+  cursor: nw-resize !important;
+}

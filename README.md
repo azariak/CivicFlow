@@ -1,11 +1,11 @@
 # DataFlowTO
-## Create by Azaria Kelman @ PROGRAM: Toronto Hackathon
+## Created by Azaria Kelman @ PROGRAM: Toronto Hackathon
 
 ## Key features
 - AI-powered chat interface for querying Toronto's open data and city services using MCP
 - Suggested questions to demonstrate how to use it
 - Markdown formatting, streaming support for text responses
-- Help menu, dark/light theme, settings API key (deprecated)
+- Help menu, dark/light theme, resize/reset container, settings API key (deprecated)
 
 ## Installation and configuration instructions 
 1. Clone the repository: `git clone https://github.com/azariak/CivicFlow.git`
