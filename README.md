@@ -31,19 +31,16 @@
 Prelaunch:
 - Purchase domain
 - Remove/improve settings menu and local API key?
-- Fix bug when line is too long and spills past blue background
+- Fix bug when line is too long and spills past blue background (happens when MD misrenders)
 - Deal with rate limits (and render the error correctly)
 - MD rendering within AI details?
 - Shows fewer results then on opendata website (total found vs returned_count?)
 - Rename to DataFlow
-- Better MD formatting instructions in systemInstructions
-- Stop autoscroll fighting when scrolling up during generation
 
 - Add support for viewing embedded data, charts etc.. 
-- Merge 2 API Gemini paths in app.jsx and generate.js
 - Voice mode?
 - Smoothen streaming
-- Non-text parts of functionResponse
-- Add more details button that allows you to get actual data
+- Non-text parts of functionResponse error in console
+- Add more details follow up button that allows you to get actual data
 - https://open.toronto.ca/toronto-open-data-awards-2025/
 - Dead links provided via MCP see: ice rinks https://www.toronto.ca/data/parks/prd/facilities/outdoor-rinks/index.html\

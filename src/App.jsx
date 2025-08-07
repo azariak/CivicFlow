@@ -46,6 +46,10 @@ const App = () => {
 
   const systemInstructions = questionsAndAnswers.systemInstructions;
   const messagesEndRef = useRef(null);
+  const chatContainerRef = useRef(null);
+  const isUserScrollingUpRef = useRef(false);
+  const lastScrollTopRef = useRef(0);
+  const scrollUpTimeoutRef = useRef(null);
 
   // Desktop detection
   useEffect(() => {
@@ -116,8 +120,41 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (!isUserScrollingUpRef.current) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages, isLoading]);
+
+  // Track active upward scrolling to temporarily suppress autoscroll
+  useEffect(() => {
+    const el = chatContainerRef.current;
+    if (!el) return;
+
+    lastScrollTopRef.current = el.scrollTop;
+
+    const handleScroll = () => {
+      const currentTop = el.scrollTop;
+      const isScrollingUp = currentTop < lastScrollTopRef.current;
+      lastScrollTopRef.current = currentTop;
+
+      if (isScrollingUp) {
+        isUserScrollingUpRef.current = true;
+        if (scrollUpTimeoutRef.current) clearTimeout(scrollUpTimeoutRef.current);
+        scrollUpTimeoutRef.current = setTimeout(() => {
+          isUserScrollingUpRef.current = false;
+        }, 10000);
+      } else {
+        // Any downward or neutral movement re-enables autoscroll immediately
+        isUserScrollingUpRef.current = false;
+      }
+    };
+
+    el.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      el.removeEventListener("scroll", handleScroll);
+      if (scrollUpTimeoutRef.current) clearTimeout(scrollUpTimeoutRef.current);
+    };
+  }, []);
 
   const sendMessage = async (text = inputMessage, retryCount = 0) => {
     if (text.trim() === "" || isLoading) return;
@@ -405,7 +442,7 @@ const App = () => {
           </div>
         </header>
 
-        <main className="chat-container">
+        <main className="chat-container" ref={chatContainerRef}>
           <MessageList 
             messages={messages} 
             isLoading={isLoading} 
