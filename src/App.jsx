@@ -16,6 +16,10 @@ function shuffleArray(array) {
   return newArray;
 }
 
+// Default container dimensions
+const DEFAULT_CONTAINER_WIDTH = 887;
+const DEFAULT_CONTAINER_HEIGHT = 724;
+
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -25,7 +29,7 @@ const App = () => {
     {
       role: "assistant",
       content:
-        "What would you like to know about Toronto and its [open data](https://www.toronto.ca/city-government/data-research-maps/open-data/)?",
+        "What would you like to know about Toronto's [open data](https://www.toronto.ca/city-government/data-research-maps/open-data/)? Ask for datasets related to your query",
       metadata: null,
     },
   ]);
@@ -38,8 +42,8 @@ const App = () => {
   
   // Resize functionality state
   const [containerDimensions, setContainerDimensions] = useState({
-    width: 830,
-    height: 675
+    width: DEFAULT_CONTAINER_WIDTH,
+    height: DEFAULT_CONTAINER_HEIGHT
   });
   const [isResizing, setIsResizing] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -93,7 +97,7 @@ const App = () => {
   };
 
   const resetContainerSize = () => {
-    setContainerDimensions({ width: 830, height: 675 });
+    setContainerDimensions({ width: DEFAULT_CONTAINER_WIDTH, height: DEFAULT_CONTAINER_HEIGHT });
   };
 
   // Reset function to reset the chat to initial state
@@ -103,7 +107,7 @@ const App = () => {
       {
         role: "assistant",
         content:
-          "What would you like to know about Toronto and its [open data](https://www.toronto.ca/city-government/data-research-maps/open-data/)?",
+          "What would you like to know about Toronto’s [open data](https://www.toronto.ca/city-government/data-research-maps/open-data/)? Ask for datasets related to X.",
         metadata: null,
       },
     ]);
@@ -470,7 +474,7 @@ const App = () => {
         {/* Resize controls - only show on desktop */}
         {isDesktop && (
           <div className="resize-controls">
-            {(containerDimensions.width !== 830 || containerDimensions.height !== 675) && (
+            {(containerDimensions.width !== DEFAULT_CONTAINER_WIDTH || containerDimensions.height !== DEFAULT_CONTAINER_HEIGHT) && (
               <button
                 className="size-reset-button"
                 onClick={resetContainerSize}
